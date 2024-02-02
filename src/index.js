@@ -83,6 +83,9 @@ const KEYS = {
     },
     d: {
         pressed: false
+    },
+    w: {
+        pressed: false
     }
 }
 
@@ -127,6 +130,13 @@ window.addEventListener('keydown', (e) => {
             KEYS.d.pressed = true;
             lastKey = 'd';
             break;
+        case 'w':
+            // shoots the character upward, and gravity activates slowly catching up
+            player.velocity.y = -10;
+            break;
+
+            @TODO
+            // ADD MORE CASES for arrow keys
     }
 });
 
@@ -138,5 +148,9 @@ window.addEventListener('keyup', (e) => {
         case 'd':
             KEYS.d.pressed = false;
             break;
+        case 'w':
+            KEYS.w.pressed = false;
+            break;
+
     }
 });
