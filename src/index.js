@@ -40,6 +40,7 @@ class Sprite {
     // draw and update the position of the sprite every frame
     update() {
         this.draw();
+        this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
 
         // checks for ground collision, sets downward move speed to 0
@@ -75,6 +76,20 @@ const enemy = new Sprite({
     }
 })
 
+// a global object to keep track of what keys are currently held down
+const KEYS = {
+    a: {
+        pressed: false
+    },
+    d: {
+        pressed: false
+    }
+}
+
+// this tracks the last key that was pressed
+// two keys can be held down at the same time, but only one can be the last key
+let lastKey;
+
 function animate() {
     // An infinite loop that draws the game
     window.requestAnimationFrame(animate);
@@ -86,6 +101,42 @@ function animate() {
     // redraw the player and enemy every frame
     player.update();
     enemy.update();
+
+    // the chatacter should not move across x axis by default
+    player.velocity.x = 0;
+
+    // check if/which key is currently held
+    // the lastKey boolean prevents us from ignoring the entire
+    // if-else when a is pressed and we're holding down multiple keys
+    if (KEYS.a.pressed === true && lastKey === 'a') {
+        player.velocity.x = -1;
+    } else if (KEYS.d.pressed === true && lastKey === 'd') {
+        player.velocity.x = 1;
+    }
 }
 
 animate();
+
+window.addEventListener('keydown', (e) => {
+    switch(e.key) {
+        case 'a':
+            KEYS.a.pressed = true;
+            lastKey = 'a';
+            break;
+        case 'd':
+            KEYS.d.pressed = true;
+            lastKey = 'd';
+            break;
+    }
+});
+
+window.addEventListener('keyup', (e) => {
+    switch(e.key) {
+        case 'a':
+            KEYS.a.pressed = false;
+            break;
+        case 'd':
+            KEYS.d.pressed = false;
+            break;
+    }
+});
