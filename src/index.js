@@ -14,8 +14,11 @@ c.fillRect(0, 0, canvas.width, canvas.height)
 
 // sprite class
 class Sprite {
-    constructor(position) {
-        this.position = position;
+    // passing in an object and destructuring lets us
+    // not worry about the parameter positions
+    constructor({position, velocity}) {
+        this.position = position; // starting position
+        this.velocity = velocity; // how fast the sprite moves
     }
 
     draw() {
@@ -28,18 +31,48 @@ class Sprite {
             150
         )
     }
+
+    // update the position of the sprite every frame
+    update() {
+        this.draw();
+        this.position.y += 10;
+    }
 }
 
+
 const player = new Sprite({
-    x: 0,
-    y: 0
+    position: {
+        x: 0,
+        y: 0
+    },
+    velocity: {
+        x: 0,
+        y: 0
+    }
 })
 
 const enemy = new Sprite({
-    x: 400,
-    y: 100
+    position: {
+        x: 400,
+        y: 100
+    },
+    velocity: {
+        x: 0,
+        y: 0
+    }
 })
 
-player.draw();
-enemy.draw();
-console.log(player);
+function animate() {
+    // An infinite loop that draws the game
+    window.requestAnimationFrame(animate);
+
+    // redraw the canvas for the next frame
+    c.fillStyle = 'black';
+    c.fillRect(0, 0, canvas.width, canvas.height);
+
+    // redraw the player and enemy every frame
+    player.update();
+    enemy.update();
+}
+
+animate();
