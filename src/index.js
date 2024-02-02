@@ -12,6 +12,10 @@ const c = canvas.getContext('2d');
 // color in the canvas, default black
 c.fillRect(0, 0, canvas.width, canvas.height)
 
+// instead of a set downward speed, we are adding this much distance everyt frame
+// gives a smoother acceleration downwards
+const GRAVITY = 0.2;
+
 // sprite class
 class Sprite {
     // passing in an object and destructuring lets us
@@ -19,6 +23,7 @@ class Sprite {
     constructor({position, velocity}) {
         this.position = position; // starting position
         this.velocity = velocity; // how fast the sprite moves
+        this.height = 150;
     }
 
     draw() {
@@ -28,14 +33,22 @@ class Sprite {
             this.position.x,
             this.position.y,
             50,
-            150
+            this.height
         )
     }
 
-    // update the position of the sprite every frame
+    // draw and update the position of the sprite every frame
     update() {
         this.draw();
-        this.position.y += 10;
+        this.position.y += this.velocity.y;
+
+        // checks for ground collision, sets downward move speed to 0
+        if((this.position.y + this.height) + this.velocity.y >= canvas.height) {
+            this.velocity.y = 0;
+        } else {
+            // gravity only applies when the character is above the ground
+            this.velocity.y += GRAVITY;
+        }
     }
 }
 
