@@ -26,16 +26,20 @@ const WALK_SPEED = 5;
 class Sprite {
     // passing in an object and destructuring lets us
     // not worry about the parameter positions
-    constructor({position, velocity, color}) {
+    constructor({position, velocity, color, offset}) {
         this.position = position; // starting position
         this.velocity = velocity; // how fast the sprite moves
         this.height = 150;
         this.width = 50;
         this.lastKey;
         this.attackBox = {
-            position: this.position, // follows the same xy origin as the character
+            position: { // follows the same xy origin as the character
+                x: this.position.x,
+                y: this.position.y
+            },
             width: 100,
-            height: 50
+            height: 50,
+            offset
         }
         this.color = color;
         this.isAttacking = false;
@@ -58,6 +62,10 @@ class Sprite {
             this.width,
             this.height
         )
+
+        // need to update the position of the attack box each frame to follow character, not just their spawn location
+        this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
+        this.attackBox.position.y = this.position.y
 
         // draw the attackBox WHEN attack is active
         if(this.isAttacking) {
@@ -97,7 +105,11 @@ const player = new Sprite({
         x: 0,
         y: 0
     },
-    color: 'red'
+    color: 'red',
+    offset: {
+        x: 0,
+        y: 0
+    }
 })
 
 const enemy = new Sprite({
@@ -109,7 +121,11 @@ const enemy = new Sprite({
         x: 0,
         y: 0
     },
-    color: 'blue'
+    color: 'blue',
+    offset: {
+        x: -50,
+        y: 0
+    }
 })
 
 // a global object to keep track of what keys are currently held down
@@ -172,21 +188,47 @@ function animate() {
         enemy.velocity.x = WALK_SPEED;
     }
 
-    // detect character collision
+    // detect player attacking collision
     if(
-        // x axis coliision
-        player.attackBox.position.x + player.attackBox.width >= enemy.position.x &&
-        player.attackBox.position.x <= enemy.position.x + enemy.width &&
-        // y axis collision
-        player.attackBox.position.y + player.attackBox.height >= enemy.position.y &&
-        player.attackBox.position.y <= enemy.position.y + enemy.height &&
-        // playr hitbox active
+        rectangularCollision({
+            rec1: player,
+            rec2: enemy
+        }) &&
+        // is player hitbox active?
         player.isAttacking
     ){
         // immediatly set attacking to false, othersise we get several hits per second
         player.isAttacking = false;
         console.log('player hit enemy')
     }
+
+    // detect enemy attacking collision
+    if(
+        rectangularCollision({
+            rec1: enemy,
+            rec2: player
+        }) &&
+        // is player hitbox active?
+        enemy.isAttacking
+    ){
+        // immediatly set attacking to false, othersise we get several hits per second
+        enemy.isAttacking = false;
+        console.log('enemy hit player')
+    }
+}
+
+function rectangularCollision({
+    rec1,
+    rec2
+}) {
+    return (
+        // x axis coliision
+        rec1.attackBox.position.x + rec1.attackBox.width >= rec2.position.x &&
+        rec1.attackBox.position.x <= rec2.position.x + rec2.width &&
+        // y axis collision
+        rec1.attackBox.position.y + rec1.attackBox.height >= rec2.position.y &&
+        rec1.attackBox.position.y <= rec2.position.y + rec2.height
+    )
 }
 
 animate();
@@ -221,6 +263,9 @@ window.addEventListener('keydown', (e) => {
             break;
         case 'ArrowUp':
             enemy.velocity.y = JUMP_HEIGHT;
+            break;
+        case 'ArrowDown':
+            enemy.attack();
             break;
     }
 });
