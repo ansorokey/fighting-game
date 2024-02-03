@@ -38,6 +38,14 @@ class Sprite {
             height: 50
         }
         this.color = color;
+        this.isAttacking = false;
+    }
+
+    attack() {
+        this.isAttacking = true;
+        setTimeout(() => {
+            this.isAttacking = false;
+        }, 100);
     }
 
     draw() {
@@ -51,9 +59,16 @@ class Sprite {
             this.height
         )
 
-        // draw the attackBox
-        c.fillStyle = 'green';
-        c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
+        // draw the attackBox WHEN attack is active
+        if(this.isAttacking) {
+            c.fillStyle = 'green';
+            c.fillRect(
+                this.attackBox.position.x,
+                this.attackBox.position.y,
+                this.attackBox.width,
+                this.attackBox.height
+            )
+        }
     }
 
     // draw and update the position of the sprite every frame
@@ -164,8 +179,12 @@ function animate() {
         player.attackBox.position.x <= enemy.position.x + enemy.width &&
         // y axis collision
         player.attackBox.position.y + player.attackBox.height >= enemy.position.y &&
-        player.attackBox.position.y <= enemy.position.y + enemy.height
+        player.attackBox.position.y <= enemy.position.y + enemy.height &&
+        // playr hitbox active
+        player.isAttacking
     ){
+        // immediatly set attacking to false, othersise we get several hits per second
+        player.isAttacking = false;
         console.log('player hit enemy')
     }
 }
@@ -186,6 +205,9 @@ window.addEventListener('keydown', (e) => {
             break;
         case 'w':
             player.velocity.y = JUMP_HEIGHT;
+            break;
+        case ' ':
+            player.attack();
             break;
 
         // enemy movements
