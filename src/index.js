@@ -9,12 +9,24 @@ console.log('Game script running')
 // color in the canvas, default black
 c.fillRect(0, 0, canvas.width, canvas.height)
 
+// BACKGROUND
 const background = new Sprite({
     position: {
         x: 0,
         y: 0
     },
     imgSrc: '/assets/background/decorated background.png'
+})
+
+// SHOP
+const shop = new Sprite({
+    position: {
+        x: 500,
+        y: 125
+    },
+    imgSrc: '/assets/decorations/shop_anim.png',
+    scale: 2.75,
+    maxFrames: 6
 })
 
 // PLAYER CHARACTER
@@ -63,6 +75,9 @@ function animate() {
 
     // draw the background first
     background.update();
+
+    // next, draw the shop
+    shop.update();
 
     // redraw the player and enemy every frame
     player.update();
