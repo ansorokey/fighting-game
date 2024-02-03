@@ -80,7 +80,7 @@ const enemy = new Fighter({
     }
 })
 
-decreaseTimer();
+decreaseTimer({player, enemy});
 
 function animate() {
     // An infinite loop that draws the game
