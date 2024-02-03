@@ -199,6 +199,7 @@ function animate() {
     ){
         // immediatly set attacking to false, othersise we get several hits per second
         player.isAttacking = false;
+        document.querySelector('#enemy-health').style.width = enemy.health;
         console.log('player hit enemy')
     }
 

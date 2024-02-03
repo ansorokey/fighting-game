@@ -1,3 +1,51 @@
-body {
-    background-color: black;
+* {
+  box-sizing: border-box;
+}
+
+.main-container {
+    /* inline-block can match uyp to the width of its children instead of a block taking up 100% width*/
+    display: inline-block;
+    position: relative;
+}
+
+.hud-container {
+    align-items: center;
+    display: flex;
+    padding: 20px;
+    position: absolute;
+    width: 100%;
+}
+
+.healthbar {
+    background-color: yellow;
+    height: 30px;
+    position: relative;
+    width: 100%;
+}
+
+.health-overlay {
+    position: absolute;
+    background-color: green;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.player2 {
+
+}
+
+.player2 {
+
+}
+
+.timer {
+    background-color: red;
+    /* flex shrink tells a child of a flex parent NOT to shrink */
+    flex-shrink: 0;
+    height: 100px;
+    width: 100px;
 }

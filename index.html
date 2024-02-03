@@ -3,11 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/style.css">
     <title>Document</title>
 </head>
 <body>
-    <!-- this will be the viewing field -->
-    <canvas></canvas>
+    <div class="main-container">
+        <div class="hud-container">
+            <div id="player-health" class="healthbar player">
+                <div class="health-overlay"></div>
+            </div>
+
+            <div class="timer"></div>
+
+            <div class="healthbar enemy">
+                <div id="enemy-health" class="health-overlay"></div>
+            </div>
+        </div>
+        <!-- this will be the viewing field -->
+        <canvas></canvas>
+    </div>
+
+    <!-- load the primary game gile -->
     <script src="/src/index.js"></script>
 </body>
 </html>
