@@ -42,10 +42,6 @@ const enemy = new Fighter({
     }
 })
 
-// this tracks the last key that was pressed
-// two keys can be held down at the same time, but only one can be the last key
-let lastKey;
-
 function determineWinner({player, enem, timerId}) {
     // stops the timer when a victor is determined
     clearTimeout(timerId);
@@ -140,7 +136,6 @@ function animate() {
         enemy.isAttacking = false;
         player.health -= 20;
         document.querySelector('#player-health').style.width = player.health + '%';
-        console.log('player hit enemy')
         console.log('enemy hit player')
     }
 

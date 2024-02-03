@@ -9,8 +9,11 @@ class Fighter extends Sprite {
         super({position})
         // this.position = position; // starting position
         this.velocity = velocity; // how fast the sprite moves
-        // this.height = 150;
-        // this.width = 50;
+        this.height = 150;
+        this.width = 50;
+
+        // this tracks the last key that was pressed
+        // two keys can be held down at the same time, but only one can be the last key
         this.lastKey;
         this.attackBox = {
             position: { // follows the same xy origin as the character
