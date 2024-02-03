@@ -24,6 +24,7 @@ class Sprite {
         this.position = position; // starting position
         this.velocity = velocity; // how fast the sprite moves
         this.height = 150;
+        this.lastKey;
     }
 
     draw() {
@@ -86,6 +87,15 @@ const KEYS = {
     },
     w: {
         pressed: false
+    },
+    ArrowLeft: {
+        pressed: false
+    },
+    ArrowRight: {
+        pressed: false
+    },
+    ArrowUp: {
+        pressed: false
     }
 }
 
@@ -105,23 +115,35 @@ function animate() {
     player.update();
     enemy.update();
 
-    // the chatacter should not move across x axis by default
+    // the character should not move across x axis by default
+    // the character moves 0 perf rame when a key is not being held down
     player.velocity.x = 0;
+    enemy.velocity.x = 0;
 
     // check if/which key is currently held
     // the lastKey boolean prevents us from ignoring the entire
     // if-else when a is pressed and we're holding down multiple keys
+    // playermovements
     if (KEYS.a.pressed === true && lastKey === 'a') {
         player.velocity.x = -1;
     } else if (KEYS.d.pressed === true && lastKey === 'd') {
         player.velocity.x = 1;
+    }
+
+    // enemy movements
+    if (KEYS.ArrowLeft.pressed === true && enemy.lastKey === 'ArrowLeft') {
+        enemy.velocity.x = -1;
+    } else if (KEYS.ArrowRight.pressed === true && enemy.lastKey === 'ArrowRight') {
+        enemy.velocity.x = 1;
     }
 }
 
 animate();
 
 window.addEventListener('keydown', (e) => {
+    // console.log(e.key)
     switch(e.key) {
+        // player movements
         case 'a':
             KEYS.a.pressed = true;
             lastKey = 'a';
@@ -135,13 +157,25 @@ window.addEventListener('keydown', (e) => {
             player.velocity.y = -10;
             break;
 
-            @TODO
-            // ADD MORE CASES for arrow keys
+        // enemy movements
+        case 'ArrowLeft':
+            KEYS.ArrowLeft.pressed = true;
+            enemy.lastKey = 'ArrowLeft';
+            break;
+        case 'ArrowRight':
+            KEYS.ArrowRight.pressed = true;
+            enemy.lastKey = 'ArrowRight';
+            break;
+        case 'ArrowUp':
+            // shoots the character upward, and gravity activates slowly catching up
+            enemy.velocity.y = -10;
+            break;
     }
 });
 
 window.addEventListener('keyup', (e) => {
     switch(e.key) {
+        // player movements
         case 'a':
             KEYS.a.pressed = false;
             break;
@@ -150,6 +184,17 @@ window.addEventListener('keyup', (e) => {
             break;
         case 'w':
             KEYS.w.pressed = false;
+            break;
+
+        // enemy movements
+        case 'ArrowLeft':
+            KEYS.ArrowLeft.pressed = false;
+            break;
+        case 'ArrowRight':
+            KEYS.ArrowRight.pressed = false;
+            break;
+        case 'ArrowUp':
+            KEYS.ArrowUp.pressed = false;
             break;
 
     }
