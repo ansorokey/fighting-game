@@ -20,7 +20,7 @@ export let timerId;
 export function decreaseTimer({player, enemy}) {
     console.log(player)
     console.log(enemy)
-    timerId = setTimeout(decreaseTimer, 1000);
+    timerId = setTimeout(() => decreaseTimer({player, enemy}), 1000);
     if(time > 0) {
         time -= 1;
         document.querySelector('#timer').innerHTML = time;
