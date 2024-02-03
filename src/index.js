@@ -31,10 +31,16 @@ class Sprite {
         this.velocity = velocity; // how fast the sprite moves
         this.height = 150;
         this.lastKey;
+        this.attackBox = {
+            position: this.position, // follows the same xy origin as the character
+            width: 100,
+            height: 50
+        }
     }
 
     draw() {
         // determines what color the fillStytle will use
+        // draw the character
         c.fillStyle = 'red';
         c.fillRect(
             this.position.x,
@@ -42,6 +48,10 @@ class Sprite {
             50,
             this.height
         )
+
+        // draw the attackBox
+        c.fillStyle = 'green';
+        c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
     }
 
     // draw and update the position of the sprite every frame
