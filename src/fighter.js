@@ -70,7 +70,7 @@ class Fighter extends Sprite {
         this.position.y += this.velocity.y;
 
         // checks for ground collision, sets downward move speed to 0
-        if((this.position.y + this.height) + this.velocity.y >= canvas.height) {
+        if((this.position.y + this.height) + this.velocity.y >= canvas.height - 99) {
             this.velocity.y = 0;
         } else {
             // gravity only applies when the character is above the ground

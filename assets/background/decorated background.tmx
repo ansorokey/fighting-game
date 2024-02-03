@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="6" tilewidth="32" tileheight="30" infinite="0" nextlayerid="11" nextobjectid="1">
+ <tileset firstgid="1" source="oak_woods_tileset.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="10" height="6" locked="1">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <imagelayer id="2" name="Image Layer 1" locked="1">
+  <image source="oak_woods_v1.0/background/background_layer_1.png" width="320" height="180"/>
+ </imagelayer>
+ <imagelayer id="3" name="Image Layer 2" locked="1">
+  <image source="oak_woods_v1.0/background/background_layer_2.png" width="320" height="180"/>
+ </imagelayer>
+ <imagelayer id="4" name="Image Layer 3" locked="1">
+  <image source="oak_woods_v1.0/background/background_layer_3.png" width="320" height="180"/>
+ </imagelayer>
+ <layer id="5" name="Tile Layer 2" width="10" height="6">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+125,125,125,125,125,125,125,125,125,125
+</data>
+ </layer>
+ <layer id="7" name="Tile Layer 3" width="10" height="6">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+6,6,6,6,6,6,6,6,6,6
+</data>
+ </layer>
+ <imagelayer id="8" name="Lamp" offsetx="267.417" offsety="92.0833">
+  <image source="oak_woods_v1.0/decorations/lamp.png" width="23" height="57"/>
+ </imagelayer>
+ <imagelayer id="9" name="fence1" offsetx="-2.33333" offsety="131.25">
+  <image source="oak_woods_v1.0/decorations/fence_1.png" width="73" height="19"/>
+ </imagelayer>
+ <imagelayer id="10" name="Image Layer 6" offsetx="68.25" offsety="118.5">
+  <image source="oak_woods_v1.0/decorations/sign.png" width="22" height="31"/>
+ </imagelayer>
+</map>

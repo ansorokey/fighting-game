@@ -1,0 +1,29 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "exportAsImage.useCurrentScale": true,
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "background_layer_1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/15184/Downloads/oak_woods_v1.0/background",
+    "map.height": 6,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 30,
+    "map.width": 10,
+    "openFiles": [
+    ],
+    "project": "fighting-game-background.tiled-project",
+    "recentFiles": [
+        "background_layer_1.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}
