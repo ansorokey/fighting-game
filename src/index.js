@@ -14,7 +14,13 @@ c.fillRect(0, 0, canvas.width, canvas.height)
 
 // instead of a set downward speed, we are adding this much distance everyt frame
 // gives a smoother acceleration downwards
-const GRAVITY = 0.2;
+const GRAVITY = 0.7;
+
+// shoots the character upward, and gravity activates slowly catching up
+const JUMP_HEIGHT = -20;
+
+// horizontal movement
+const WALK_SPEED = 5;
 
 // sprite class
 class Sprite {
@@ -124,17 +130,17 @@ function animate() {
     // the lastKey boolean prevents us from ignoring the entire
     // if-else when a is pressed and we're holding down multiple keys
     // playermovements
-    if (KEYS.a.pressed === true && lastKey === 'a') {
-        player.velocity.x = -1;
-    } else if (KEYS.d.pressed === true && lastKey === 'd') {
-        player.velocity.x = 1;
+    if (KEYS.a.pressed === true && player.lastKey === 'a') {
+        player.velocity.x = -WALK_SPEED;
+    } else if (KEYS.d.pressed === true && player.lastKey === 'd') {
+        player.velocity.x = WALK_SPEED;
     }
 
     // enemy movements
     if (KEYS.ArrowLeft.pressed === true && enemy.lastKey === 'ArrowLeft') {
-        enemy.velocity.x = -1;
+        enemy.velocity.x = -WALK_SPEED;
     } else if (KEYS.ArrowRight.pressed === true && enemy.lastKey === 'ArrowRight') {
-        enemy.velocity.x = 1;
+        enemy.velocity.x = WALK_SPEED;
     }
 }
 
@@ -146,15 +152,14 @@ window.addEventListener('keydown', (e) => {
         // player movements
         case 'a':
             KEYS.a.pressed = true;
-            lastKey = 'a';
+            player.lastKey = 'a';
             break;
         case 'd':
             KEYS.d.pressed = true;
-            lastKey = 'd';
+            player.lastKey = 'd';
             break;
         case 'w':
-            // shoots the character upward, and gravity activates slowly catching up
-            player.velocity.y = -10;
+            player.velocity.y = JUMP_HEIGHT;
             break;
 
         // enemy movements
@@ -167,8 +172,7 @@ window.addEventListener('keydown', (e) => {
             enemy.lastKey = 'ArrowRight';
             break;
         case 'ArrowUp':
-            // shoots the character upward, and gravity activates slowly catching up
-            enemy.velocity.y = -10;
+            enemy.velocity.y = JUMP_HEIGHT;
             break;
     }
 });
