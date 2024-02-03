@@ -5,8 +5,22 @@ import GLOBAL from './global.js';
 class Fighter extends Sprite {
     // passing in an object and destructuring lets us
     // not worry about the parameter positions
-    constructor({position, velocity, color, offset}) {
-        super({position})
+    constructor({
+        position,
+        velocity,
+        color,
+        imgSrc,
+        scale=1,
+        maxFrames=1,
+        offset={x:0, y:0},
+    }) {
+        super({
+            position,
+            imgSrc,
+            scale,
+            maxFrames,
+            offset
+        })
         // this.position = position; // starting position
         this.velocity = velocity; // how fast the sprite moves
         this.height = 150;
@@ -27,6 +41,10 @@ class Fighter extends Sprite {
         this.color = color;
         this.isAttacking = false;
         this.health = 100;
+        this.maxFrames = maxFrames;
+        this.curFrame = 0;
+        this.elapsedFrames = 0;
+        this.heldFrames = 8;
     }
 
     attack() {
@@ -36,36 +54,38 @@ class Fighter extends Sprite {
         }, 100);
     }
 
-    draw() {
-        // determines what color the fillStytle will use
-        // draw the character
-        c.fillStyle = this.color;
-        c.fillRect(
-            this.position.x,
-            this.position.y,
-            this.width,
-            this.height
-        )
+    // draw() {
+    //     // determines what color the fillStytle will use
+    //     // draw the character
+    //     c.fillStyle = this.color;
+    //     c.fillRect(
+    //         this.position.x,
+    //         this.position.y,
+    //         this.width,
+    //         this.height
+    //     )
 
-        // need to update the position of the attack box each frame to follow character, not just their spawn location
-        this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
-        this.attackBox.position.y = this.position.y
+    //     // need to update the position of the attack box each frame to follow character, not just their spawn location
+    //     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
+    //     this.attackBox.position.y = this.position.y
 
-        // draw the attackBox WHEN attack is active
-        if(this.isAttacking) {
-            c.fillStyle = 'green';
-            c.fillRect(
-                this.attackBox.position.x,
-                this.attackBox.position.y,
-                this.attackBox.width,
-                this.attackBox.height
-            )
-        }
-    }
+    //     // draw the attackBox WHEN attack is active
+    //     if(this.isAttacking) {
+    //         c.fillStyle = 'green';
+    //         c.fillRect(
+    //             this.attackBox.position.x,
+    //             this.attackBox.position.y,
+    //             this.attackBox.width,
+    //             this.attackBox.height
+    //         )
+    //     }
+    // }
 
     // draw and update the position of the sprite every frame
     update() {
         this.draw();
+        this.animateFrames();
+
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
 

@@ -3,7 +3,13 @@ import {c, canvas} from '/src/canvas.js';
 class Sprite {
     // passing in an object and destructuring lets us
     // not worry about the parameter positions
-    constructor({position, imgSrc, scale=1, maxFrames=1}) {
+    constructor({
+        position,
+        imgSrc,
+        scale=1,
+        maxFrames=1,
+        offset={x:0, y:0}
+    }) {
         this.position = position; // starting position
         this.height = 150;
         this.width = 50;
@@ -16,6 +22,7 @@ class Sprite {
         this.curFrame = 0;
         this.elapsedFrames = 0; // how many frames have we elapsed in the animation
         this.heldFrames = 8; // how many frames should we go through before changing, every xth frame, change
+        this.offset = offset;
     }
 
     draw() {
@@ -25,8 +32,8 @@ class Sprite {
             0, // y crop
             (this.image.width / this.maxFrames), // width crop
             this.image.height, // height crop
-            this.position.x, // x
-            this.position.y, // y
+            this.position.x - this.offset.x, // x
+            this.position.y - this.offset.y, // y
             (this.image.width / this.maxFrames) * this.scale, // width
             this.image.height * this.scale // height
         )
@@ -37,6 +44,11 @@ class Sprite {
     // if there is no animation frame, it resets back to 0 (1 - 1 = 0)
     update() {
         this.draw();
+        this.animateFrames();
+
+    }
+
+    animateFrames() {
         this.elapsedFrames += 1;
         // every time we hit the frame changing threshold
         if(this.elapsedFrames % this.heldFrames === 0) {
@@ -47,7 +59,6 @@ class Sprite {
                 this.curFrame = 0;
             }
         }
-
     }
 }
 

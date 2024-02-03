@@ -43,6 +43,13 @@ const player = new Fighter({
     offset: {
         x: 0,
         y: 0
+    },
+    imgSrc: '/assets/player1/Idle.png',
+    maxFrames: 8,
+    scale: 2.5,
+    offset: {
+        x: 215,
+        y: 155
     }
 })
 
@@ -81,7 +88,7 @@ function animate() {
 
     // redraw the player and enemy every frame
     player.update();
-    enemy.update();
+    // enemy.update();
 
     // the character should not move across x axis by default
     // the character moves 0 perf rame when a key is not being held down
