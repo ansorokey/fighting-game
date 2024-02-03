@@ -1,103 +1,16 @@
+import Sprite from "/src/sprite.js";
+import Fighter from "/src/fighter.js";
+import {c, canvas} from '/src/canvas.js';
+import GLOBAL from "/src/global.js";
+
 console.log('Game script running')
-
-const canvas = document.querySelector('canvas');
-// could also do this in css, but it'll load at a different time
-// 16 x 9 ratio, default pixels
-canvas.width = 1024;
-canvas.height = 576;
-
-// the canvas API and all methods/properties
-const c = canvas.getContext('2d');
 
 // color in the canvas, default black
 c.fillRect(0, 0, canvas.width, canvas.height)
 
-// instead of a set downward speed, we are adding this much distance everyt frame
-// gives a smoother acceleration downwards
-const GRAVITY = 0.7;
-
-// shoots the character upward, and gravity activates slowly catching up
-const JUMP_HEIGHT = -20;
-
-// horizontal movement
-const WALK_SPEED = 5;
-
 // sprite class
-class Sprite {
-    // passing in an object and destructuring lets us
-    // not worry about the parameter positions
-    constructor({position, velocity, color, offset}) {
-        this.position = position; // starting position
-        this.velocity = velocity; // how fast the sprite moves
-        this.height = 150;
-        this.width = 50;
-        this.lastKey;
-        this.attackBox = {
-            position: { // follows the same xy origin as the character
-                x: this.position.x,
-                y: this.position.y
-            },
-            width: 100,
-            height: 50,
-            offset
-        }
-        this.color = color;
-        this.isAttacking = false;
-        this.health = 100;
-    }
 
-    attack() {
-        this.isAttacking = true;
-        setTimeout(() => {
-            this.isAttacking = false;
-        }, 100);
-    }
-
-    draw() {
-        // determines what color the fillStytle will use
-        // draw the character
-        c.fillStyle = this.color;
-        c.fillRect(
-            this.position.x,
-            this.position.y,
-            this.width,
-            this.height
-        )
-
-        // need to update the position of the attack box each frame to follow character, not just their spawn location
-        this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
-        this.attackBox.position.y = this.position.y
-
-        // draw the attackBox WHEN attack is active
-        if(this.isAttacking) {
-            c.fillStyle = 'green';
-            c.fillRect(
-                this.attackBox.position.x,
-                this.attackBox.position.y,
-                this.attackBox.width,
-                this.attackBox.height
-            )
-        }
-    }
-
-    // draw and update the position of the sprite every frame
-    update() {
-        this.draw();
-        this.position.x += this.velocity.x;
-        this.position.y += this.velocity.y;
-
-        // checks for ground collision, sets downward move speed to 0
-        if((this.position.y + this.height) + this.velocity.y >= canvas.height) {
-            this.velocity.y = 0;
-        } else {
-            // gravity only applies when the character is above the ground
-            this.velocity.y += GRAVITY;
-        }
-    }
-}
-
-
-const player = new Sprite({
+const player = new Fighter({
     position: {
         x: 0,
         y: 0
@@ -113,7 +26,7 @@ const player = new Sprite({
     }
 })
 
-const enemy = new Sprite({
+const enemy = new Fighter({
     position: {
         x: 400,
         y: 100
@@ -208,16 +121,16 @@ function animate() {
     // if-else when a is pressed and we're holding down multiple keys
     // playermovements
     if (KEYS.a.pressed === true && player.lastKey === 'a') {
-        player.velocity.x = -WALK_SPEED;
+        player.velocity.x = -GLOBAL.WALK_SPEED;
     } else if (KEYS.d.pressed === true && player.lastKey === 'd') {
-        player.velocity.x = WALK_SPEED;
+        player.velocity.x = GLOBAL.WALK_SPEED;
     }
 
     // enemy movements
     if (KEYS.ArrowLeft.pressed === true && enemy.lastKey === 'ArrowLeft') {
-        enemy.velocity.x = -WALK_SPEED;
+        enemy.velocity.x = -GLOBAL.WALK_SPEED;
     } else if (KEYS.ArrowRight.pressed === true && enemy.lastKey === 'ArrowRight') {
-        enemy.velocity.x = WALK_SPEED;
+        enemy.velocity.x = GLOBAL.WALK_SPEED;
     }
 
     // detect player attacking collision
@@ -288,7 +201,7 @@ window.addEventListener('keydown', (e) => {
             player.lastKey = 'd';
             break;
         case 'w':
-            player.velocity.y = JUMP_HEIGHT;
+            player.velocity.y = GLOBAL.JUMP_HEIGHT;
             break;
         case ' ':
             player.attack();
@@ -304,7 +217,7 @@ window.addEventListener('keydown', (e) => {
             enemy.lastKey = 'ArrowRight';
             break;
         case 'ArrowUp':
-            enemy.velocity.y = JUMP_HEIGHT;
+            enemy.velocity.y = GLOBAL.JUMP_HEIGHT;
             break;
         case 'ArrowDown':
             enemy.attack();
