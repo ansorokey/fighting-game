@@ -50,6 +50,16 @@ const player = new Fighter({
     offset: {
         x: 215,
         y: 155
+    },
+    sprites: {
+        idle: {
+            imgSrc: '/assets/player1/Idle.png',
+            maxFrames: 8
+        },
+        run: {
+            imgSrc: '/assets/player1/Run.png',
+            maxFrames: 8
+        }
     }
 })
 
@@ -94,15 +104,19 @@ function animate() {
     // the character moves 0 perf rame when a key is not being held down
     player.velocity.x = 0;
     enemy.velocity.x = 0;
+    player.image = player.sprites.idle.image;
 
     // check if/which key is currently held
     // the lastKey boolean prevents us from ignoring the entire
     // if-else when a is pressed and we're holding down multiple keys
+    // also change to run animation
     // playermovements
     if (GLOBAL.KEYS.a.pressed === true && player.lastKey === 'a') {
         player.velocity.x = -GLOBAL.WALK_SPEED;
+        player.image = player.sprites.run.image;
     } else if (GLOBAL.KEYS.d.pressed === true && player.lastKey === 'd') {
         player.velocity.x = GLOBAL.WALK_SPEED;
+        player.image = player.sprites.run.image;
     }
 
     // enemy movements
