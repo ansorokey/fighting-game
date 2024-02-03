@@ -8,8 +8,7 @@ console.log('Game script running')
 // color in the canvas, default black
 c.fillRect(0, 0, canvas.width, canvas.height)
 
-// sprite class
-
+// PLAYER CHARACTER
 const player = new Fighter({
     position: {
         x: 0,
@@ -26,6 +25,7 @@ const player = new Fighter({
     }
 })
 
+// ENEMY CHARACTER
 const enemy = new Fighter({
     position: {
         x: 400,
@@ -41,28 +41,6 @@ const enemy = new Fighter({
         y: 0
     }
 })
-
-// a global object to keep track of what keys are currently held down
-const KEYS = {
-    a: {
-        pressed: false
-    },
-    d: {
-        pressed: false
-    },
-    w: {
-        pressed: false
-    },
-    ArrowLeft: {
-        pressed: false
-    },
-    ArrowRight: {
-        pressed: false
-    },
-    ArrowUp: {
-        pressed: false
-    }
-}
 
 // this tracks the last key that was pressed
 // two keys can be held down at the same time, but only one can be the last key
@@ -120,16 +98,16 @@ function animate() {
     // the lastKey boolean prevents us from ignoring the entire
     // if-else when a is pressed and we're holding down multiple keys
     // playermovements
-    if (KEYS.a.pressed === true && player.lastKey === 'a') {
+    if (GLOBAL.KEYS.a.pressed === true && player.lastKey === 'a') {
         player.velocity.x = -GLOBAL.WALK_SPEED;
-    } else if (KEYS.d.pressed === true && player.lastKey === 'd') {
+    } else if (GLOBAL.KEYS.d.pressed === true && player.lastKey === 'd') {
         player.velocity.x = GLOBAL.WALK_SPEED;
     }
 
     // enemy movements
-    if (KEYS.ArrowLeft.pressed === true && enemy.lastKey === 'ArrowLeft') {
+    if (GLOBAL.KEYS.ArrowLeft.pressed === true && enemy.lastKey === 'ArrowLeft') {
         enemy.velocity.x = -GLOBAL.WALK_SPEED;
-    } else if (KEYS.ArrowRight.pressed === true && enemy.lastKey === 'ArrowRight') {
+    } else if (GLOBAL.KEYS.ArrowRight.pressed === true && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = GLOBAL.WALK_SPEED;
     }
 
@@ -193,11 +171,11 @@ window.addEventListener('keydown', (e) => {
     switch(e.key) {
         // player movements
         case 'a':
-            KEYS.a.pressed = true;
+            GLOBAL.KEYS.a.pressed = true;
             player.lastKey = 'a';
             break;
         case 'd':
-            KEYS.d.pressed = true;
+            GLOBAL.KEYS.d.pressed = true;
             player.lastKey = 'd';
             break;
         case 'w':
@@ -209,11 +187,11 @@ window.addEventListener('keydown', (e) => {
 
         // enemy movements
         case 'ArrowLeft':
-            KEYS.ArrowLeft.pressed = true;
+            GLOBAL.KEYS.ArrowLeft.pressed = true;
             enemy.lastKey = 'ArrowLeft';
             break;
         case 'ArrowRight':
-            KEYS.ArrowRight.pressed = true;
+            GLOBAL.KEYS.ArrowRight.pressed = true;
             enemy.lastKey = 'ArrowRight';
             break;
         case 'ArrowUp':
@@ -229,24 +207,24 @@ window.addEventListener('keyup', (e) => {
     switch(e.key) {
         // player movements
         case 'a':
-            KEYS.a.pressed = false;
+            GLOBAL.KEYS.a.pressed = false;
             break;
         case 'd':
-            KEYS.d.pressed = false;
+            GLOBAL.KEYS.d.pressed = false;
             break;
         case 'w':
-            KEYS.w.pressed = false;
+            GLOBAL.KEYS.w.pressed = false;
             break;
 
         // enemy movements
         case 'ArrowLeft':
-            KEYS.ArrowLeft.pressed = false;
+            GLOBAL.KEYS.ArrowLeft.pressed = false;
             break;
         case 'ArrowRight':
-            KEYS.ArrowRight.pressed = false;
+            GLOBAL.KEYS.ArrowRight.pressed = false;
             break;
         case 'ArrowUp':
-            KEYS.ArrowUp.pressed = false;
+            GLOBAL.KEYS.ArrowUp.pressed = false;
             break;
 
     }
