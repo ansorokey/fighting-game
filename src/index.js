@@ -26,26 +26,28 @@ const WALK_SPEED = 5;
 class Sprite {
     // passing in an object and destructuring lets us
     // not worry about the parameter positions
-    constructor({position, velocity}) {
+    constructor({position, velocity, color}) {
         this.position = position; // starting position
         this.velocity = velocity; // how fast the sprite moves
         this.height = 150;
+        this.width = 50;
         this.lastKey;
         this.attackBox = {
             position: this.position, // follows the same xy origin as the character
             width: 100,
             height: 50
         }
+        this.color = color;
     }
 
     draw() {
         // determines what color the fillStytle will use
         // draw the character
-        c.fillStyle = 'red';
+        c.fillStyle = this.color;
         c.fillRect(
             this.position.x,
             this.position.y,
-            50,
+            this.width,
             this.height
         )
 
@@ -79,7 +81,8 @@ const player = new Sprite({
     velocity: {
         x: 0,
         y: 0
-    }
+    },
+    color: 'red'
 })
 
 const enemy = new Sprite({
@@ -90,7 +93,8 @@ const enemy = new Sprite({
     velocity: {
         x: 0,
         y: 0
-    }
+    },
+    color: 'blue'
 })
 
 // a global object to keep track of what keys are currently held down
@@ -151,6 +155,18 @@ function animate() {
         enemy.velocity.x = -WALK_SPEED;
     } else if (KEYS.ArrowRight.pressed === true && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = WALK_SPEED;
+    }
+
+    // detect character collision
+    if(
+        // x axis coliision
+        player.attackBox.position.x + player.attackBox.width >= enemy.position.x &&
+        player.attackBox.position.x <= enemy.position.x + enemy.width &&
+        // y axis collision
+        player.attackBox.position.y + player.attackBox.height >= enemy.position.y &&
+        player.attackBox.position.y <= enemy.position.y + enemy.height
+    ){
+        console.log('player hit enemy')
     }
 }
 
