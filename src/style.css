@@ -47,10 +47,25 @@
     bottom: 0;
 }
 
-.timer {
+#timer {
+    align-items: center;
     background-color: red;
+    display: flex;
     /* flex shrink tells a child of a flex parent NOT to shrink */
     flex-shrink: 0;
     height: 100px;
+    justify-content: center;
     width: 100px;
+}
+
+#results {
+    align-items: center;
+    color: white;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
 }

@@ -155,6 +155,37 @@ const KEYS = {
 // two keys can be held down at the same time, but only one can be the last key
 let lastKey;
 
+function determineWinner({player, enem, timerId}) {
+    // stops the timer when a victor is determined
+    clearTimeout(timerId);
+
+    document.querySelector('#results').style.display = 'flex';
+
+    let winText;
+    if(player.health === enemy.health) {
+        winText = 'DRAW';
+    } else if(player.health > enemy.health) {
+        winText = 'Player 1 wins';
+    } else {
+        winText = 'Player 2 wins';
+    }
+    document.querySelector('#results').innerHTML = winText;
+}
+
+let time = 60;
+let timerId;
+function decreaseTimer() {
+    timerId = setTimeout(decreaseTimer, 1000);
+    if(time > 0) {
+        time -= 1;
+        document.querySelector('#timer').innerHTML = time;
+    } else if(time === 0) {
+        determineWinner({player, enemy});
+    }
+}
+
+decreaseTimer();
+
 function animate() {
     // An infinite loop that draws the game
     window.requestAnimationFrame(animate);
@@ -221,6 +252,11 @@ function animate() {
         console.log('player hit enemy')
         console.log('enemy hit player')
     }
+
+    if(enemy.health <= 0 || player.health <= 0) {
+        determineWinner({player, enemy, timerId});
+    }
+
 }
 
 function rectangularCollision({
@@ -234,10 +270,10 @@ function rectangularCollision({
         // y axis collision
         rec1.attackBox.position.y + rec1.attackBox.height >= rec2.position.y &&
         rec1.attackBox.position.y <= rec2.position.y + rec2.height
-    )
-}
+        )
+    }
 
-animate();
+    animate();
 
 window.addEventListener('keydown', (e) => {
     // console.log(e.key)
@@ -273,7 +309,7 @@ window.addEventListener('keydown', (e) => {
         case 'ArrowDown':
             enemy.attack();
             break;
-    }
+        }
 });
 
 window.addEventListener('keyup', (e) => {
