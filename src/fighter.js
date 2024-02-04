@@ -159,20 +159,18 @@ class Fighter extends Sprite {
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
         this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
 
-        c.fillStyle = 'green';
-        c.fillRect(
-            this.attackBox.position.x,
-            this.attackBox.position.y,
-            this.attackBox.width,
-            this.attackBox.height
-        )
+        // // draws the attackBox (dev)
+        // c.fillStyle = 'green';
+        // c.fillRect(
+        //     this.attackBox.position.x,
+        //     this.attackBox.position.y,
+        //     this.attackBox.width,
+        //     this.attackBox.height
+        // )
 
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
 
-        // draw the attackBox WHEN attack is active
-        // if(this.isAttacking) {
-        // }
 
         // checks for ground collision, sets downward move speed to 0
         // set the spoition so the character is in the place where it no longer needs to move down

@@ -236,7 +236,7 @@ function animate() {
             rec2: player
         }) &&
         // is player hitbox active?
-        enemy.isAttacking && player.curFrame === 4
+        enemy.isAttacking && enemy.curFrame === 2
     ){
         // immediatly set attacking to false, othersise we get several hits per second
         enemy.isAttacking = false;
@@ -244,6 +244,11 @@ function animate() {
         document.querySelector('#player-health').style.width = player.health + '%';
         // console.log('enemy hit player')
     }
+
+        // player misses attack
+        if(enemy.isAttacking && enemy.curFrame == 2) {
+            enemy.isAttacking = false;
+        }
 
     if(enemy.health <= 0 || player.health <= 0) {
         determineWinner({player, enemy, timerId});
