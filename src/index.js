@@ -1,7 +1,7 @@
-import Sprite from "/src/sprite.js";
-import Fighter from "/src/fighter.js";
-import {c, canvas} from '/src/canvas.js';
-import GLOBAL from "/src/global.js";
+import Sprite from "./sprite.js";
+import Fighter from "./fighter.js";
+import {c, canvas} from './canvas.js';
+import GLOBAL from "./global.js";
 import { timerId, decreaseTimer, determineWinner, rectangularCollision } from "./utils.js";
 
 console.log('Game is running! FIGHT!')

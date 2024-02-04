@@ -1,4 +1,4 @@
-import {c, canvas} from '/src/canvas.js';
+import {c, canvas} from './canvas.js';
 
 class Sprite {
     // passing in an object and destructuring lets us

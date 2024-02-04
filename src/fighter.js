@@ -1,4 +1,4 @@
-import {c, canvas} from '/src/canvas.js';
+import {canvas} from './canvas.js';
 import Sprite from './sprite.js';
 import GLOBAL from './global.js';
 
