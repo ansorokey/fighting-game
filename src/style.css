@@ -1,5 +1,11 @@
 * {
   box-sizing: border-box;
+  font-family: 'Press Start 2P', system-ui;
+}
+
+body {
+    display: flex;
+    justify-content: center;
 }
 
 .main-container {
@@ -17,7 +23,8 @@
 }
 
 .healthbar {
-    background-color: yellow;
+    background-color: red;
+    border: 4px solid white;
     height: 30px;
     position: relative;
     width: 100%;
@@ -26,6 +33,11 @@
 .healthbar.player {
     display: flex;
     justify-content: flex-end;
+    border-right: none;
+}
+
+.healthbar.enemy {
+    border-left: none;
 }
 
 /* doing this so the playr health decreases towards the right */
@@ -39,7 +51,7 @@
 
 .health-overlay {
     position: absolute;
-    background-color: green;
+    background-color: #6d28d9;
     height: 100%;
     width: 100%;
     top: 0;
@@ -49,11 +61,15 @@
 
 #timer {
     align-items: center;
-    background-color: red;
+    background-color: #020617;
+    border: 4px solid white;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
     display: flex;
     /* flex shrink tells a child of a flex parent NOT to shrink */
     flex-shrink: 0;
-    height: 100px;
+    height: 50px;
     justify-content: center;
     width: 100px;
 }

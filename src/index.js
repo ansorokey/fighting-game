@@ -177,6 +177,10 @@ function animate() {
     // next, draw the shop
     shop.update();
 
+    // white half opacity overlay to make the characters stand out more
+    c.fillStyle = 'rgba(255, 255, 255, 0.15)'
+    c.fillRect(0, 0, canvas.width, canvas.height)
+
     // redraw the player and enemy every frame
     player.update();
     enemy.update();
@@ -236,8 +240,9 @@ function animate() {
         // immediatly set attacking to false, othersise we get several hits per second
         enemy.takeHit();
         player.isAttacking = false;
-        document.querySelector('#enemy-health').style.width = enemy.health + '%';
-        // console.log('player hit enemy')
+        gsap.to('#enemy-health', {
+            width: enemy.health + '%'
+        })
     }
 
     // player misses attack
@@ -257,8 +262,9 @@ function animate() {
         // immediatly set attacking to false, othersise we get several hits per second
         player.takeHit();
         enemy.isAttacking = false;
-        document.querySelector('#player-health').style.width = player.health + '%';
-        // console.log('enemy hit player')
+        gsap.to('#player-health', {
+            width: player.health + '%'
+        })
     }
 
         // player misses attack
