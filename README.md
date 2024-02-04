@@ -7,3 +7,4 @@ This project was created by following [JavaScript Fighting Game Tutorial with HT
 Please donate if able!
 Background Art - [Oak Woods — Environment Asset](https://brullov.itch.io/oak-woods)
 Player Character 1 - [Martial Hero](https://luizmelo.itch.io/martial-hero)
+Enemy Character 1 [Martial Hero 2](https://luizmelo.itch.io/martial-hero-2)

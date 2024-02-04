@@ -89,6 +89,35 @@ const enemy = new Fighter({
     offset: {
         x: -50,
         y: 0
+    },
+    imgSrc: '/assets/player2/Idle.png',
+    maxFrames: 4,
+    scale: 2.5,
+    offset: {
+        x: 215,
+        y: 167
+    },
+    sprites: {
+        idle: {
+            imgSrc: '/assets/player2/Idle.png',
+            maxFrames: 4
+        },
+        run: {
+            imgSrc: '/assets/player2/Run.png',
+            maxFrames: 8
+        },
+        jump: {
+            imgSrc: '/assets/player2/Jump.png',
+            maxFrames: 2
+        },
+        fall: {
+            imgSrc: '/assets/player2/Fall.png',
+            maxFrames: 2
+        },
+        attack1: {
+            imgSrc: '/assets/player2/Attack1.png',
+            maxFrames: 4
+        }
     }
 })
 
@@ -110,7 +139,7 @@ function animate() {
 
     // redraw the player and enemy every frame
     player.update();
-    // enemy.update();
+    enemy.update();
 
     // the character should not move across x axis by default
     // the character moves 0 per frame when a key is not being held down
@@ -141,8 +170,18 @@ function animate() {
     // enemy movements
     if (GLOBAL.KEYS.ArrowLeft.pressed === true && enemy.lastKey === 'ArrowLeft') {
         enemy.velocity.x = -GLOBAL.WALK_SPEED;
+        enemy.switchSprite('run');
     } else if (GLOBAL.KEYS.ArrowRight.pressed === true && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = GLOBAL.WALK_SPEED;
+        enemy.switchSprite('run');
+    } else {
+        enemy.switchSprite('idle');
+    }
+
+    if(enemy.velocity.y < 0) {
+        enemy.switchSprite('jump');
+    } else if (enemy.velocity.y > 0) {
+        enemy.switchSprite('fall');
     }
 
     // detect player attacking collision
