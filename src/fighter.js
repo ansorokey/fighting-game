@@ -55,6 +55,7 @@ class Fighter extends Sprite {
     }
 
     attack() {
+        this.switchSprite('attack1');
         this.isAttacking = true;
         setTimeout(() => {
             this.isAttacking = false;
@@ -62,6 +63,13 @@ class Fighter extends Sprite {
     }
 
     switchSprite(sprite) {
+        // if we're attacking, we don't want to switch to other animations
+        // if the animation is not done, return to prevent switching
+        if (
+            this.image === this.sprites.attack1.image &&
+            this.curFrame < this.sprites.attack1.maxFrames - 1
+        ) return;
+
         // each animation might has a different frame count,
         // need to update that in the player properties
         switch (sprite) {
@@ -90,6 +98,13 @@ class Fighter extends Sprite {
                 if(this.image !== this.sprites.fall.image) {
                     this.image = this.sprites.fall.image;
                     this.maxFrames = this.sprites.fall.maxFrames;
+                    this.curFrame = 0;
+                }
+                break;
+            case 'attack1':
+                if(this.image !== this.sprites.attack1.image) {
+                    this.image = this.sprites.attack1.image;
+                    this.maxFrames = this.sprites.attack1.maxFrames;
                     this.curFrame = 0;
                 }
                 break;

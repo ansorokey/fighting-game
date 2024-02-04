@@ -67,6 +67,10 @@ const player = new Fighter({
         fall: {
             imgSrc: '/assets/player1/Fall.png',
             maxFrames: 2
+        },
+        attack1: {
+            imgSrc: '/assets/player1/Attack1.png',
+            maxFrames: 6
         }
     }
 })
