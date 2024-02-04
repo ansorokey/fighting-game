@@ -13,7 +13,12 @@ class Fighter extends Sprite {
         scale=1,
         maxFrames=1,
         offset={x:0, y:0},
-        sprites
+        sprites,
+        attackBox = {
+            offset: { x: 0, y: 0},
+            width: undefined,
+            height: undefined
+        }
     }) {
         super({
             position,
@@ -35,9 +40,9 @@ class Fighter extends Sprite {
                 x: this.position.x,
                 y: this.position.y
             },
-            width: 100,
-            height: 50,
-            offset
+            width: attackBox.width,
+            height: attackBox.height,
+            offset: attackBox.offset
         }
         this.color = color;
         this.isAttacking = false;
@@ -143,8 +148,23 @@ class Fighter extends Sprite {
         this.draw();
         this.animateFrames();
 
+        this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
+        this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
+
+        c.fillStyle = 'green';
+        c.fillRect(
+            this.attackBox.position.x,
+            this.attackBox.position.y,
+            this.attackBox.width,
+            this.attackBox.height
+        )
+
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
+
+        // draw the attackBox WHEN attack is active
+        // if(this.isAttacking) {
+        // }
 
         // checks for ground collision, sets downward move speed to 0
         // set the spoition so the character is in the place where it no longer needs to move down

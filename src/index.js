@@ -72,6 +72,14 @@ const player = new Fighter({
             imgSrc: '/assets/player1/Attack1.png',
             maxFrames: 6
         }
+    },
+    attackBox: {
+        offset: {
+            x: 100,
+            y: 50
+        },
+        width: 150,
+        height: 50
     }
 })
 
@@ -118,6 +126,14 @@ const enemy = new Fighter({
             imgSrc: '/assets/player2/Attack1.png',
             maxFrames: 4
         }
+    },
+    attackBox: {
+        offset: {
+            x: 0,
+            y: 0
+        },
+        width: 100,
+        height: 50
     }
 })
 
