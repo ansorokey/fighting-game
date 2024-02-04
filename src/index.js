@@ -80,6 +80,10 @@ const player = new Fighter({
             imgSrc: '/assets/player1/Take Hit.png',
             maxFrames: 4
         },
+        death: {
+            imgSrc: '/assets/player1/Death.png',
+            maxFrames: 6
+        },
     },
     attackBox: {
         offset: {
@@ -141,6 +145,10 @@ const enemy = new Fighter({
         takeHit: {
             imgSrc: '/assets/player2/Take hit.png',
             maxFrames: 3
+        },
+        death: {
+            imgSrc: '/assets/player2/Death.png',
+            maxFrames: 7
         },
     },
     attackBox: {
@@ -267,40 +275,49 @@ function animate() {
 animate();
 
 window.addEventListener('keydown', (e) => {
-    // console.log(e.key)
-    switch(e.key) {
-        // player movements
-        case 'a':
-            GLOBAL.KEYS.a.pressed = true;
-            player.lastKey = 'a';
-            break;
-        case 'd':
-            GLOBAL.KEYS.d.pressed = true;
-            player.lastKey = 'd';
-            break;
-        case 'w':
-            player.velocity.y = GLOBAL.JUMP_HEIGHT;
-            break;
-        case ' ':
-            player.attack();
-            break;
 
-        // enemy movements
-        case 'ArrowLeft':
-            GLOBAL.KEYS.ArrowLeft.pressed = true;
-            enemy.lastKey = 'ArrowLeft';
-            break;
-        case 'ArrowRight':
-            GLOBAL.KEYS.ArrowRight.pressed = true;
-            enemy.lastKey = 'ArrowRight';
-            break;
-        case 'ArrowUp':
-            enemy.velocity.y = GLOBAL.JUMP_HEIGHT;
-            break;
-        case 'ArrowDown':
-            enemy.attack();
-            break;
+    // player movements
+    if(!player.isDead) {
+        switch(e.key) {
+            case 'a':
+                GLOBAL.KEYS.a.pressed = true;
+                player.lastKey = 'a';
+                break;
+            case 'd':
+                GLOBAL.KEYS.d.pressed = true;
+                player.lastKey = 'd';
+                break;
+            case 'w':
+                player.velocity.y = GLOBAL.JUMP_HEIGHT;
+                break;
+            case ' ':
+                player.attack();
+                break;
         }
+    }
+
+
+
+    // enemy movements
+    if(!enemy.isDead) {
+        switch(e.key) {
+            case 'ArrowLeft':
+                GLOBAL.KEYS.ArrowLeft.pressed = true;
+                enemy.lastKey = 'ArrowLeft';
+                break;
+            case 'ArrowRight':
+                GLOBAL.KEYS.ArrowRight.pressed = true;
+                enemy.lastKey = 'ArrowRight';
+                break;
+            case 'ArrowUp':
+                enemy.velocity.y = GLOBAL.JUMP_HEIGHT;
+                break;
+            case 'ArrowDown':
+                enemy.attack();
+                break;
+        }
+    }
+
 });
 
 window.addEventListener('keyup', (e) => {

@@ -52,6 +52,7 @@ class Fighter extends Sprite {
         this.elapsedFrames = 0;
         this.heldFrames = 8;
         this.sprites = sprites;
+        this.isDead = false;
 
         for(const s in this.sprites) {
             sprites[s].image = new Image();
@@ -69,10 +70,24 @@ class Fighter extends Sprite {
 
     takeHit() {
         this.health -= 20;
-        this.switchSprite('takeHit')
+
+        if(this.health <= 0) {
+            this.switchSprite('death');
+        } else {
+            this.switchSprite('takeHit');
+        }
     }
 
     switchSprite(sprite) {
+        // character death takes top priority over all other naimations
+        if(this.image === this.sprites.death.image) {
+            // make sure character finishes death aimation before stopping others
+            if(this.curFrame === this.sprites.death.maxFrames - 1) {
+                this.isDead = true;
+            }
+            return;
+        }
+
         // if we're attacking, we don't want to switch to other animations
         // if the animation is not done, return to prevent switching
         if (
@@ -138,6 +153,12 @@ class Fighter extends Sprite {
                     this.curFrame = 0;
                 }
                 break;
+            case 'death':
+                if(this.image !== this.sprites.death.image) {
+                    this.image = this.sprites.death.image;
+                    this.maxFrames = this.sprites.death.maxFrames;
+                    this.curFrame = 0;
+                }
         }
     }
 
@@ -172,7 +193,8 @@ class Fighter extends Sprite {
 
     update() {
         this.draw();
-        this.animateFrames();
+        // only animate if character is alive/active
+        if(!this.isDead) this.animateFrames();
 
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
         this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
