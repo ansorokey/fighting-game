@@ -4,7 +4,7 @@ import {c, canvas} from '/src/canvas.js';
 import GLOBAL from "/src/global.js";
 import { timerId, decreaseTimer, determineWinner, rectangularCollision } from "./utils.js";
 
-console.log('Game script running')
+console.log('Game is running! FIGHT!')
 
 // color in the canvas, default black
 c.fillRect(0, 0, canvas.width, canvas.height)
