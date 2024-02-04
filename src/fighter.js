@@ -61,6 +61,31 @@ class Fighter extends Sprite {
         }, 100);
     }
 
+    switchSprite(sprite) {
+        // each animation might has a different frame count,
+        // need to update that in the player properties
+        switch (sprite) {
+            case 'idle':
+                if(this.image !== this.sprites.idle.image) {
+                    this.image = this.sprites.idle.image;
+                    this.maxFrames = this.sprites.idle.maxFrames;
+                }
+                break;
+            case 'run':
+                if(this.image !== this.sprites.run.image) {
+                    this.image = this.sprites.run.image;
+                    this.maxFrames = this.sprites.run.maxFrames;
+                }
+                break;
+            case 'jump':
+                if(this.image !== this.sprites.jump.image) {
+                    this.image = this.sprites.jump.image;
+                    this.maxFrames = this.sprites.jump.maxFrames;
+                }
+                break;
+        }
+    }
+
     // draw() {
     //     // determines what color the fillStytle will use
     //     // draw the character
