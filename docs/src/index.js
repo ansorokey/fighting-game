@@ -15,7 +15,7 @@ const background = new Sprite({
         x: 0,
         y: 0
     },
-    imgSrc: '../assets/background/decorated background.png'
+    imgSrc: '../docs/assets/background/decorated background.png'
 })
 
 // SHOP
@@ -24,7 +24,7 @@ const shop = new Sprite({
         x: 500,
         y: 125
     },
-    imgSrc: '../assets/decorations/shop_anim.png',
+    imgSrc: '../docs/assets/decorations/shop_anim.png',
     scale: 2.75,
     maxFrames: 6
 })
@@ -44,7 +44,7 @@ const player = new Fighter({
         x: 0,
         y: 0
     },
-    imgSrc: '../assets/player1/Idle.png',
+    imgSrc: '../docs/assets/player1/Idle.png',
     maxFrames: 8,
     scale: 2.5,
     offset: {
@@ -53,35 +53,35 @@ const player = new Fighter({
     },
     sprites: {
         idle: {
-            imgSrc: '../assets/player1/Idle.png',
+            imgSrc: '../docs/assets/player1/Idle.png',
             maxFrames: 8
         },
         run: {
-            imgSrc: '../assets/player1/Run.png',
+            imgSrc: '../docs/assets/player1/Run.png',
             maxFrames: 8
         },
         runLeft: {
-            imgSrc: '../assets/player1/Run_left.png',
+            imgSrc: '../docs/assets/player1/Run_left.png',
             maxFrames: 8
         },
         jump: {
-            imgSrc: '../assets/player1/Jump.png',
+            imgSrc: '../docs/assets/player1/Jump.png',
             maxFrames: 2
         },
         fall: {
-            imgSrc: '../assets/player1/Fall.png',
+            imgSrc: '../docs/assets/player1/Fall.png',
             maxFrames: 2
         },
         attack1: {
-            imgSrc: '../assets/player1/Attack1.png',
+            imgSrc: '../docs/assets/player1/Attack1.png',
             maxFrames: 6
         },
         takeHit: {
-            imgSrc: '../assets/player1/Take Hit.png',
+            imgSrc: '../docs/assets/player1/Take Hit.png',
             maxFrames: 4
         },
         death: {
-            imgSrc: '../assets/player1/Death.png',
+            imgSrc: '../docs/assets/player1/Death.png',
             maxFrames: 6
         },
     },
@@ -110,7 +110,7 @@ const enemy = new Fighter({
         x: -50,
         y: 0
     },
-    imgSrc: '../assets/player2/Idle.png',
+    imgSrc: '../docs/assets/player2/Idle.png',
     maxFrames: 4,
     scale: 2.5,
     offset: {
@@ -119,35 +119,35 @@ const enemy = new Fighter({
     },
     sprites: {
         idle: {
-            imgSrc: '../assets/player2/Idle.png',
+            imgSrc: '../docs/assets/player2/Idle.png',
             maxFrames: 4
         },
         run: {
-            imgSrc: '../assets/player2/Run.png',
+            imgSrc: '../docs/assets/player2/Run.png',
             maxFrames: 8
         },
         runLeft: {
-            imgSrc: '../assets/player2/Run_left.png',
+            imgSrc: '../docs/assets/player2/Run_left.png',
             maxFrames: 8
         },
         jump: {
-            imgSrc: '../assets/player2/Jump.png',
+            imgSrc: '../docs/assets/player2/Jump.png',
             maxFrames: 2
         },
         fall: {
-            imgSrc: '../assets/player2/Fall.png',
+            imgSrc: '../docs/assets/player2/Fall.png',
             maxFrames: 2
         },
         attack1: {
-            imgSrc: '../assets/player2/Attack1.png',
+            imgSrc: '../docs/assets/player2/Attack1.png',
             maxFrames: 4
         },
         takeHit: {
-            imgSrc: '../assets/player2/Take hit.png',
+            imgSrc: '../docs/assets/player2/Take hit.png',
             maxFrames: 3
         },
         death: {
-            imgSrc: '../assets/player2/Death.png',
+            imgSrc: '../docs/assets/player2/Death.png',
             maxFrames: 7
         },
     },
