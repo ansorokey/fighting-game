@@ -18,8 +18,6 @@ export function determineWinner({player, enemy, timerId}) {
 let time = 6;
 export let timerId;
 export function decreaseTimer({player, enemy}) {
-    console.log(player)
-    console.log(enemy)
     timerId = setTimeout(() => decreaseTimer({player, enemy}), 1000);
     if(time > 0) {
         time -= 1;

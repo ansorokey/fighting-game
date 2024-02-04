@@ -69,18 +69,28 @@ class Fighter extends Sprite {
                 if(this.image !== this.sprites.idle.image) {
                     this.image = this.sprites.idle.image;
                     this.maxFrames = this.sprites.idle.maxFrames;
+                    this.curFrame = 0;
                 }
                 break;
             case 'run':
                 if(this.image !== this.sprites.run.image) {
                     this.image = this.sprites.run.image;
                     this.maxFrames = this.sprites.run.maxFrames;
+                    this.curFrame = 0;
                 }
                 break;
             case 'jump':
                 if(this.image !== this.sprites.jump.image) {
                     this.image = this.sprites.jump.image;
                     this.maxFrames = this.sprites.jump.maxFrames;
+                    this.curFrame = 0;
+                }
+                break;
+            case 'fall':
+                if(this.image !== this.sprites.fall.image) {
+                    this.image = this.sprites.fall.image;
+                    this.maxFrames = this.sprites.fall.maxFrames;
+                    this.curFrame = 0;
                 }
                 break;
         }
@@ -122,8 +132,11 @@ class Fighter extends Sprite {
         this.position.y += this.velocity.y;
 
         // checks for ground collision, sets downward move speed to 0
+        // set the spoition so the character is in the place where it no longer needs to move down
+        // prevents idle switch spasms
         if((this.position.y + this.height) + this.velocity.y >= canvas.height - 99) {
             this.velocity.y = 0;
+            this.position.y = 327;
         } else {
             // gravity only applies when the character is above the ground
             this.velocity.y += GLOBAL.GRAVITY;

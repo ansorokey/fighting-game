@@ -63,6 +63,10 @@ const player = new Fighter({
         jump: {
             imgSrc: '/assets/player1/Jump.png',
             maxFrames: 2
+        },
+        fall: {
+            imgSrc: '/assets/player1/Fall.png',
+            maxFrames: 2
         }
     }
 })
@@ -105,10 +109,9 @@ function animate() {
     // enemy.update();
 
     // the character should not move across x axis by default
-    // the character moves 0 perf rame when a key is not being held down
+    // the character moves 0 per frame when a key is not being held down
     player.velocity.x = 0;
     enemy.velocity.x = 0;
-    player.switchSprite('idle');
 
     // check if/which key is currently held
     // the lastKey boolean prevents us from ignoring the entire
@@ -121,10 +124,14 @@ function animate() {
     } else if (GLOBAL.KEYS.d.pressed === true && player.lastKey === 'd') {
         player.velocity.x = GLOBAL.WALK_SPEED;
         player.switchSprite('run');
+    } else {
+        player.switchSprite('idle');
     }
 
     if(player.velocity.y < 0) {
         player.switchSprite('jump');
+    } else if (player.velocity.y > 0) {
+        player.switchSprite('fall');
     }
 
     // enemy movements
@@ -147,7 +154,7 @@ function animate() {
         player.isAttacking = false;
         enemy.health -= 20;
         document.querySelector('#enemy-health').style.width = enemy.health + '%';
-        console.log('player hit enemy')
+        // console.log('player hit enemy')
     }
 
     // detect enemy attacking collision
@@ -163,7 +170,7 @@ function animate() {
         enemy.isAttacking = false;
         player.health -= 20;
         document.querySelector('#player-health').style.width = player.health + '%';
-        console.log('enemy hit player')
+        // console.log('enemy hit player')
     }
 
     if(enemy.health <= 0 || player.health <= 0) {
