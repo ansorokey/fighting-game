@@ -62,9 +62,9 @@ class Fighter extends Sprite {
     attack() {
         this.switchSprite('attack1');
         this.isAttacking = true;
-        setTimeout(() => {
-            this.isAttacking = false;
-        }, 100);
+        // setTimeout(() => {
+        //     this.isAttacking = false;
+        // }, 100);
     }
 
     switchSprite(sprite) {
@@ -89,6 +89,13 @@ class Fighter extends Sprite {
                 if(this.image !== this.sprites.run.image) {
                     this.image = this.sprites.run.image;
                     this.maxFrames = this.sprites.run.maxFrames;
+                    this.curFrame = 0;
+                }
+                break;
+            case 'runLeft':
+                if(this.image !== this.sprites.runLeft.image) {
+                    this.image = this.sprites.runLeft.image;
+                    this.maxFrames = this.sprites.runLeft.maxFrames;
                     this.curFrame = 0;
                 }
                 break;
@@ -144,6 +151,7 @@ class Fighter extends Sprite {
     // }
 
     // draw and update the position of the sprite every frame
+
     update() {
         this.draw();
         this.animateFrames();

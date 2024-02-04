@@ -60,6 +60,10 @@ const player = new Fighter({
             imgSrc: '/assets/player1/Run.png',
             maxFrames: 8
         },
+        runLeft: {
+            imgSrc: '/assets/player1/Run_left.png',
+            maxFrames: 8
+        },
         jump: {
             imgSrc: '/assets/player1/Jump.png',
             maxFrames: 2
@@ -114,6 +118,10 @@ const enemy = new Fighter({
             imgSrc: '/assets/player2/Run.png',
             maxFrames: 8
         },
+        runLeft: {
+            imgSrc: '/assets/player2/Run_left.png',
+            maxFrames: 8
+        },
         jump: {
             imgSrc: '/assets/player2/Jump.png',
             maxFrames: 2
@@ -129,10 +137,10 @@ const enemy = new Fighter({
     },
     attackBox: {
         offset: {
-            x: 0,
-            y: 0
+            x: -170,
+            y: 50
         },
-        width: 100,
+        width: 170,
         height: 50
     }
 })
@@ -169,7 +177,7 @@ function animate() {
     // playermovements
     if (GLOBAL.KEYS.a.pressed === true && player.lastKey === 'a') {
         player.velocity.x = -GLOBAL.WALK_SPEED;
-        player.switchSprite('run');
+        player.switchSprite('runLeft');
     } else if (GLOBAL.KEYS.d.pressed === true && player.lastKey === 'd') {
         player.velocity.x = GLOBAL.WALK_SPEED;
         player.switchSprite('run');
@@ -186,7 +194,7 @@ function animate() {
     // enemy movements
     if (GLOBAL.KEYS.ArrowLeft.pressed === true && enemy.lastKey === 'ArrowLeft') {
         enemy.velocity.x = -GLOBAL.WALK_SPEED;
-        enemy.switchSprite('run');
+        enemy.switchSprite('runLeft');
     } else if (GLOBAL.KEYS.ArrowRight.pressed === true && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = GLOBAL.WALK_SPEED;
         enemy.switchSprite('run');
@@ -206,14 +214,19 @@ function animate() {
             rec1: player,
             rec2: enemy
         }) &&
-        // is player hitbox active?
-        player.isAttacking
+        // is player hitbox active AND in the attack animation?
+        player.isAttacking && player.curFrame === 4
     ){
         // immediatly set attacking to false, othersise we get several hits per second
         player.isAttacking = false;
         enemy.health -= 20;
         document.querySelector('#enemy-health').style.width = enemy.health + '%';
         // console.log('player hit enemy')
+    }
+
+    // player misses attack
+    if(player.isAttacking && player.curFrame == 4) {
+        player.isAttacking = false;
     }
 
     // detect enemy attacking collision
@@ -223,7 +236,7 @@ function animate() {
             rec2: player
         }) &&
         // is player hitbox active?
-        enemy.isAttacking
+        enemy.isAttacking && player.curFrame === 4
     ){
         // immediatly set attacking to false, othersise we get several hits per second
         enemy.isAttacking = false;
