@@ -67,12 +67,23 @@ class Fighter extends Sprite {
         // }, 100);
     }
 
+    takeHit() {
+        this.health -= 20;
+        this.switchSprite('takeHit')
+    }
+
     switchSprite(sprite) {
         // if we're attacking, we don't want to switch to other animations
         // if the animation is not done, return to prevent switching
         if (
             this.image === this.sprites.attack1.image &&
             this.curFrame < this.sprites.attack1.maxFrames - 1
+        ) return;
+
+        // same thing for taking a hit, needs to override all other animations
+        if (
+            this.image === this.sprites.takeHit.image &&
+            this.curFrame < this.sprites.takeHit.maxFrames - 1
         ) return;
 
         // each animation might has a different frame count,
@@ -117,6 +128,13 @@ class Fighter extends Sprite {
                 if(this.image !== this.sprites.attack1.image) {
                     this.image = this.sprites.attack1.image;
                     this.maxFrames = this.sprites.attack1.maxFrames;
+                    this.curFrame = 0;
+                }
+                break;
+            case 'takeHit':
+                if(this.image !== this.sprites.takeHit.image) {
+                    this.image = this.sprites.takeHit.image;
+                    this.maxFrames = this.sprites.takeHit.maxFrames;
                     this.curFrame = 0;
                 }
                 break;

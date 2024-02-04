@@ -75,7 +75,11 @@ const player = new Fighter({
         attack1: {
             imgSrc: '/assets/player1/Attack1.png',
             maxFrames: 6
-        }
+        },
+        takeHit: {
+            imgSrc: '/assets/player1/Take Hit.png',
+            maxFrames: 4
+        },
     },
     attackBox: {
         offset: {
@@ -133,7 +137,11 @@ const enemy = new Fighter({
         attack1: {
             imgSrc: '/assets/player2/Attack1.png',
             maxFrames: 4
-        }
+        },
+        takeHit: {
+            imgSrc: '/assets/player2/Take hit.png',
+            maxFrames: 3
+        },
     },
     attackBox: {
         offset: {
@@ -208,7 +216,7 @@ function animate() {
         enemy.switchSprite('fall');
     }
 
-    // detect player attacking collision
+    // PLAYER ATTACKS ENEMY
     if(
         rectangularCollision({
             rec1: player,
@@ -216,10 +224,10 @@ function animate() {
         }) &&
         // is player hitbox active AND in the attack animation?
         player.isAttacking && player.curFrame === 4
-    ){
+    ){ //
         // immediatly set attacking to false, othersise we get several hits per second
+        enemy.takeHit();
         player.isAttacking = false;
-        enemy.health -= 20;
         document.querySelector('#enemy-health').style.width = enemy.health + '%';
         // console.log('player hit enemy')
     }
@@ -229,7 +237,7 @@ function animate() {
         player.isAttacking = false;
     }
 
-    // detect enemy attacking collision
+    // ENEMY ATTACKS PLAYER
     if(
         rectangularCollision({
             rec1: enemy,
@@ -239,8 +247,8 @@ function animate() {
         enemy.isAttacking && enemy.curFrame === 2
     ){
         // immediatly set attacking to false, othersise we get several hits per second
+        player.takeHit();
         enemy.isAttacking = false;
-        player.health -= 20;
         document.querySelector('#player-health').style.width = player.health + '%';
         // console.log('enemy hit player')
     }
