@@ -339,11 +339,13 @@ window.addEventListener('keydown', (e) => {
                 GLOBAL.KEYS.a.pressed = true;
                 player.lastKey = 'a';
                 player.facing = 'Left';
+                player.attackBox.offset.x = -182;
                 break;
             case 'd':
                 GLOBAL.KEYS.d.pressed = true;
                 player.lastKey = 'd';
                 player.facing = 'Right';
+                player.attackBox.offset.x = 102;
                 break;
             case 'w':
                 player.velocity.y = GLOBAL.JUMP_HEIGHT;
@@ -363,11 +365,13 @@ window.addEventListener('keydown', (e) => {
                 GLOBAL.KEYS.ArrowLeft.pressed = true;
                 enemy.lastKey = 'ArrowLeft';
                 enemy.facing = 'Left';
+                enemy.attackBox.offset.x = -170;
                 break;
             case 'ArrowRight':
                 GLOBAL.KEYS.ArrowRight.pressed = true;
                 enemy.lastKey = 'ArrowRight';
                 enemy.facing = 'Right';
+                enemy.attackBox.offset.x = 70;
                 break;
             case 'ArrowUp':
                 enemy.velocity.y = GLOBAL.JUMP_HEIGHT;
