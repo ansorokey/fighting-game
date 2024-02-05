@@ -33,8 +33,8 @@ const shop = new Sprite({
 const player = new Fighter({
     facing: 'Right',
     position: {
-        x: 0,
-        y: 0
+        x: canvas.width/4 - 25,
+        y: GLOBAL.FLOOR_HEIGHT - 150
     },
     velocity: {
         x: 0,
@@ -124,8 +124,8 @@ const player = new Fighter({
 const enemy = new Fighter({
     facing: 'Left',
     position: {
-        x: 400,
-        y: 100
+        x: 3 * canvas.width/4 - 25,
+        y: GLOBAL.FLOOR_HEIGHT - 150
     },
     velocity: {
         x: 0,
@@ -234,6 +234,10 @@ function animate() {
     // redraw the player and enemy every frame
     player.update();
     enemy.update();
+
+    // draw the floor line (dev)
+    // c.fillStyle = 'yellow';
+    // c.fillRect(0, GLOBAL.FLOOR_HEIGHT, canvas.width, GLOBAL.FLOOR_HEIGHT+10)
 
     // the character should not move across x axis by default
     // the character moves 0 per frame when a key is not being held down

@@ -8,6 +8,9 @@ const JUMP_HEIGHT = -20;
 // horizontal movement
 const WALK_SPEED = 5;
 
+// Height of floor
+const FLOOR_HEIGHT = 477;
+
 // a global object to keep track of what keys are currently held down
 const KEYS = {
     a: {
@@ -34,7 +37,8 @@ const GLOBAL = {
     GRAVITY,
     JUMP_HEIGHT,
     WALK_SPEED,
-    KEYS
+    KEYS,
+    FLOOR_HEIGHT
 }
 
 export default GLOBAL;

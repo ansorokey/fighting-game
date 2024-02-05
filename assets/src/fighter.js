@@ -228,13 +228,22 @@ class Fighter extends Sprite {
         //     this.attackBox.height
         // )
 
+        // draws the sprite xy origin point (dev)
+        // c.fillStyle = this.color;
+        // c.fillRect(
+        //     this.position.x,
+        //     this.position.y,
+        //     5,
+        //     5,
+        // )
+
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
 
         // checks for ground collision, sets downward move speed to 0
         // set the spoition so the character is in the place where it no longer needs to move down
         // prevents idle switch spasms
-        if((this.position.y + this.height) + this.velocity.y >= canvas.height - 99) {
+        if((this.position.y + this.height) + this.velocity.y >= GLOBAL.FLOOR_HEIGHT) {
             this.velocity.y = 0;
             this.position.y = 327;
             this.canJump = true;
