@@ -142,36 +142,60 @@ const enemy = new Fighter({
         y: 167
     },
     sprites: {
-        idle: {
-            imgSrc: '../assets/images/player2/Idle.png',
+        idleRight: {
+            imgSrc: '../assets/images/player2/Idle_right.png',
             maxFrames: 4
         },
-        run: {
-            imgSrc: '../assets/images/player2/Run.png',
+        idleLeft: {
+            imgSrc: '../assets/images/player2/Idle_left.png',
+            maxFrames: 4
+        },
+        runRight: {
+            imgSrc: '../assets/images/player2/Run_right.png',
             maxFrames: 8
         },
         runLeft: {
             imgSrc: '../assets/images/player2/Run_left.png',
             maxFrames: 8
         },
-        jump: {
-            imgSrc: '../assets/images/player2/Jump.png',
+        jumpRight: {
+            imgSrc: '../assets/images/player2/Jump_right.png',
             maxFrames: 2
         },
-        fall: {
-            imgSrc: '../assets/images/player2/Fall.png',
+        jumpLeft: {
+            imgSrc: '../assets/images/player2/Jump_left.png',
             maxFrames: 2
         },
-        attack1: {
-            imgSrc: '../assets/images/player2/Attack1.png',
+        fallRight: {
+            imgSrc: '../assets/images/player2/Fall_right.png',
+            maxFrames: 2
+        },
+        fallLeft: {
+            imgSrc: '../assets/images/player2/Fall_left.png',
+            maxFrames: 2
+        },
+        attack1Right: {
+            imgSrc: '../assets/images/player2/Attack1_right.png',
             maxFrames: 4
         },
-        takeHit: {
-            imgSrc: '../assets/images/player2/Take hit.png',
+        attack1Left: {
+            imgSrc: '../assets/images/player2/Attack1_left.png',
+            maxFrames: 4
+        },
+        takeHitRight: {
+            imgSrc: '../assets/images/player2/Take_hit_right.png',
             maxFrames: 3
         },
-        death: {
-            imgSrc: '../assets/images/player2/Death.png',
+        takeHitLeft: {
+            imgSrc: '../assets/images/player2/Take_hit_left.png',
+            maxFrames: 3
+        },
+        deathRight: {
+            imgSrc: '../assets/images/player2/Death_right.png',
+            maxFrames: 7
+        },
+        deathLeft: {
+            imgSrc: '../assets/images/player2/Death_left.png',
             maxFrames: 7
         },
     },
