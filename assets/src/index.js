@@ -246,10 +246,10 @@ function animate() {
     // also change to run animation
     // playermovements
     if (GLOBAL.KEYS.a.pressed === true && player.lastKey === 'a') {
-        player.velocity.x = -GLOBAL.WALK_SPEED;
+       if(player.position.x + -GLOBAL.WALK_SPEED >= 0) player.velocity.x = -GLOBAL.WALK_SPEED;
         player.switchSprite('run');
     } else if (GLOBAL.KEYS.d.pressed === true && player.lastKey === 'd') {
-        player.velocity.x = GLOBAL.WALK_SPEED;
+        if(player.position.x + player.width + GLOBAL.WALK_SPEED <= canvas.width) player.velocity.x = GLOBAL.WALK_SPEED;
         player.switchSprite('run');
     } else {
         player.switchSprite('idle');
@@ -263,10 +263,10 @@ function animate() {
 
     // enemy movements
     if (GLOBAL.KEYS.ArrowLeft.pressed === true && enemy.lastKey === 'ArrowLeft') {
-        enemy.velocity.x = -GLOBAL.WALK_SPEED;
+        if(enemy.position.x + -GLOBAL.WALK_SPEED >= 0) enemy.velocity.x = -GLOBAL.WALK_SPEED;
         enemy.switchSprite('run');
     } else if (GLOBAL.KEYS.ArrowRight.pressed === true && enemy.lastKey === 'ArrowRight') {
-        enemy.velocity.x = GLOBAL.WALK_SPEED;
+        if(enemy.position.x + enemy.width + GLOBAL.WALK_SPEED <= canvas.width) enemy.velocity.x = GLOBAL.WALK_SPEED;
         enemy.switchSprite('run');
     } else {
         enemy.switchSprite('idle');
