@@ -19,7 +19,7 @@ class Fighter extends Sprite {
             width: undefined,
             height: undefined
         },
-        facing
+        facing,
     }) {
         super({
             position,
@@ -55,6 +55,7 @@ class Fighter extends Sprite {
         this.sprites = sprites;
         this.isDead = false;
         this.facing = facing;
+        this.canJump = true;
 
         for(const s in this.sprites) {
             sprites[s].image = new Image();
@@ -81,7 +82,6 @@ class Fighter extends Sprite {
     }
 
     switchSprite(sprite) {
-        console.log(sprite + this.facing)
         // character death takes top priority over all other naimations
         if(this.image === this.sprites.deathLeft.image || this.image === this.sprites.deathRight.image) {
             // make sure character finishes death aimation before stopping others
@@ -208,55 +208,28 @@ class Fighter extends Sprite {
         }
     }
 
-    // draw() {
-    //     // determines what color the fillStytle will use
-    //     // draw the character
-    //     c.fillStyle = this.color;
-    //     c.fillRect(
-    //         this.position.x,
-    //         this.position.y,
-    //         this.width,
-    //         this.height
-    //     )
-
-    //     // need to update the position of the attack box each frame to follow character, not just their spawn location
-    //     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
-    //     this.attackBox.position.y = this.position.y
-
-    //     // draw the attackBox WHEN attack is active
-    //     if(this.isAttacking) {
-    //         c.fillStyle = 'green';
-    //         c.fillRect(
-    //             this.attackBox.position.x,
-    //             this.attackBox.position.y,
-    //             this.attackBox.width,
-    //             this.attackBox.height
-    //         )
-    //     }
-    // }
-
-    // draw and update the position of the sprite every frame
 
     update() {
+        // draw and update the position of the sprite every frame
         this.draw();
         // only animate if character is alive/active
         if(!this.isDead) this.animateFrames();
 
+        // need to update the position of the attack box each frame to follow character, not just their spawn location
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
         this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
 
         // draws the attackBox (dev)
-        c.fillStyle = this.color;
-        c.fillRect(
-            this.attackBox.position.x,
-            this.attackBox.position.y,
-            this.attackBox.width,
-            this.attackBox.height
-        )
+        // c.fillStyle = this.color;
+        // c.fillRect(
+        //     this.attackBox.position.x,
+        //     this.attackBox.position.y,
+        //     this.attackBox.width,
+        //     this.attackBox.height
+        // )
 
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
-
 
         // checks for ground collision, sets downward move speed to 0
         // set the spoition so the character is in the place where it no longer needs to move down
@@ -264,6 +237,7 @@ class Fighter extends Sprite {
         if((this.position.y + this.height) + this.velocity.y >= canvas.height - 99) {
             this.velocity.y = 0;
             this.position.y = 327;
+            this.canJump = true;
         } else {
             // gravity only applies when the character is above the ground
             this.velocity.y += GLOBAL.GRAVITY;

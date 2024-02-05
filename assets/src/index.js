@@ -348,7 +348,8 @@ window.addEventListener('keydown', (e) => {
                 player.attackBox.offset.x = 102;
                 break;
             case 'w':
-                player.velocity.y = GLOBAL.JUMP_HEIGHT;
+                if(player.canJump) player.velocity.y = GLOBAL.JUMP_HEIGHT;
+                player.canJump = false;
                 break;
             case ' ':
                 player.attack();
@@ -374,7 +375,8 @@ window.addEventListener('keydown', (e) => {
                 enemy.attackBox.offset.x = 70;
                 break;
             case 'ArrowUp':
-                enemy.velocity.y = GLOBAL.JUMP_HEIGHT;
+                if(enemy.canJump) enemy.velocity.y = GLOBAL.JUMP_HEIGHT;
+                enemy.canJump = false;
                 break;
             case 'ArrowDown':
                 enemy.attack();
