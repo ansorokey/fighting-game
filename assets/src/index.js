@@ -5,7 +5,6 @@ import GLOBAL from "./global.js";
 import { timerId, decreaseTimer, determineWinner, rectangularCollision } from "./utils.js";
 
 console.log('Game is running! FIGHT!')
-// ...git
 
 // color in the canvas, default black
 c.fillRect(0, 0, canvas.width, canvas.height)
@@ -18,8 +17,6 @@ const background = new Sprite({
     },
     imgSrc: '../assets/images/background/decorated background.png'
 })
-
-console.log(background);
 
 // SHOP
 const shop = new Sprite({
@@ -47,7 +44,7 @@ const player = new Fighter({
         x: 0,
         y: 0
     },
-    imgSrc: '../assets/images/player1/Idle.png',
+    imgSrc: '../assets/images/player1/Idle_right.png',
     maxFrames: 8,
     scale: 2.5,
     offset: {
@@ -55,36 +52,60 @@ const player = new Fighter({
         y: 155
     },
     sprites: {
-        idle: {
-            imgSrc: '../assets/images/player1/Idle.png',
+        idleRight: {
+            imgSrc: '../assets/images/player1/Idle_right.png',
             maxFrames: 8
         },
-        run: {
-            imgSrc: '../assets/images/player1/Run.png',
+        idleLeft: {
+            imgSrc: '../assets/images/player1/Idle_left.png',
+            maxFrames: 8
+        },
+        runRight: {
+            imgSrc: '../assets/images/player1/Run_right.png',
             maxFrames: 8
         },
         runLeft: {
             imgSrc: '../assets/images/player1/Run_left.png',
             maxFrames: 8
         },
-        jump: {
-            imgSrc: '../assets/images/player1/Jump.png',
+        jumpLeft: {
+            imgSrc: '../assets/images/player1/Jump_left.png',
             maxFrames: 2
         },
-        fall: {
-            imgSrc: '../assets/images/player1/Fall.png',
+        jumpRight: {
+            imgSrc: '../assets/images/player1/Jump_right.png',
             maxFrames: 2
         },
-        attack1: {
-            imgSrc: '../assets/images/player1/Attack1.png',
+        fallLeft: {
+            imgSrc: '../assets/images/player1/Fall_left.png',
+            maxFrames: 2
+        },
+        fallRight: {
+            imgSrc: '../assets/images/player1/Fall_right.png',
+            maxFrames: 2
+        },
+        attack1Left: {
+            imgSrc: '../assets/images/player1/Attack1_left.png',
             maxFrames: 6
         },
-        takeHit: {
-            imgSrc: '../assets/images/player1/Take Hit.png',
+        attack1Right: {
+            imgSrc: '../assets/images/player1/Attack1_right.png',
+            maxFrames: 6
+        },
+        takeHitLeft: {
+            imgSrc: '../assets/images/player1/Take_hit_left.png',
             maxFrames: 4
         },
-        death: {
-            imgSrc: '../assets/images/player1/Death.png',
+        takeHitRight: {
+            imgSrc: '../assets/images/player1/Take_hit_right.png',
+            maxFrames: 4
+        },
+        deathLeft: { //this
+            imgSrc: '../assets/images/player1/Death_left.png',
+            maxFrames: 6
+        },
+        deathRight: {
+            imgSrc: '../assets/images/player1/Death_right.png',
             maxFrames: 6
         },
     },
