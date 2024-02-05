@@ -342,14 +342,19 @@ window.addEventListener('keydown', (e) => {
             case 'a':
                 GLOBAL.KEYS.a.pressed = true;
                 player.lastKey = 'a';
-                player.facing = 'Left';
-                player.attackBox.offset.x = -182;
+                if(!player.isAttacking){
+                    player.facing = 'Left';
+                    player.attackBox.offset.x = -182;
+                }
                 break;
             case 'd':
                 GLOBAL.KEYS.d.pressed = true;
                 player.lastKey = 'd';
-                player.facing = 'Right';
-                player.attackBox.offset.x = 102;
+                // prevents the hitbox from switching sides when attack animation active
+                if(!player.isAttacking) {
+                    player.facing = 'Right';
+                    player.attackBox.offset.x = 102;
+                }
                 break;
             case 'w':
                 if(player.canJump) player.velocity.y = GLOBAL.JUMP_HEIGHT;
@@ -369,14 +374,18 @@ window.addEventListener('keydown', (e) => {
             case 'ArrowLeft':
                 GLOBAL.KEYS.ArrowLeft.pressed = true;
                 enemy.lastKey = 'ArrowLeft';
-                enemy.facing = 'Left';
-                enemy.attackBox.offset.x = -170;
+                if(!enemy.isAttacking) {
+                    enemy.facing = 'Left';
+                    enemy.attackBox.offset.x = -170;
+                }
                 break;
             case 'ArrowRight':
                 GLOBAL.KEYS.ArrowRight.pressed = true;
                 enemy.lastKey = 'ArrowRight';
-                enemy.facing = 'Right';
-                enemy.attackBox.offset.x = 70;
+                if(!enemy.isAttacking) {
+                    enemy.facing = 'Right';
+                    enemy.attackBox.offset.x = 70;
+                }
                 break;
             case 'ArrowUp':
                 if(enemy.canJump) enemy.velocity.y = GLOBAL.JUMP_HEIGHT;

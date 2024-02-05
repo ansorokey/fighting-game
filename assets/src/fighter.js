@@ -1,4 +1,4 @@
-import {c, canvas} from './canvas.js';
+import {c, canvas} from './canvas.js'; // keep this in for dev stuff
 import Sprite from './sprite.js';
 import GLOBAL from './global.js';
 
@@ -29,7 +29,7 @@ class Fighter extends Sprite {
             offset
         })
         // this.position = position; // starting position
-        this.velocity = velocity; // how fast the sprite moves
+        this.velocity = velocity; // how fast the sprite moves/pixels moved
         this.height = 150;
         this.width = 50;
 
@@ -64,11 +64,8 @@ class Fighter extends Sprite {
     }
 
     attack() {
-        this.switchSprite('attack1');
         this.isAttacking = true;
-        // setTimeout(() => {
-        //     this.isAttacking = false;
-        // }, 100);
+        this.switchSprite('attack1');
     }
 
     takeHit() {
