@@ -18,7 +18,8 @@ class Fighter extends Sprite {
             offset: { x: 0, y: 0},
             width: undefined,
             height: undefined
-        }
+        },
+        facing
     }) {
         super({
             position,
@@ -53,6 +54,7 @@ class Fighter extends Sprite {
         this.heldFrames = 8;
         this.sprites = sprites;
         this.isDead = false;
+        this.facing = facing;
 
         for(const s in this.sprites) {
             sprites[s].image = new Image();
@@ -79,10 +81,11 @@ class Fighter extends Sprite {
     }
 
     switchSprite(sprite) {
+        console.log(sprite + this.facing)
         // character death takes top priority over all other naimations
-        if(this.image === this.sprites.death.image) {
+        if(this.image === this.sprites.deathLeft.image || this.image === this.sprites.deathRight.image) {
             // make sure character finishes death aimation before stopping others
-            if(this.curFrame === this.sprites.death.maxFrames - 1) {
+            if(this.curFrame === this.sprites.deathLeft.maxFrames - 1) {
                 this.isDead = true;
             }
             return;
@@ -91,30 +94,37 @@ class Fighter extends Sprite {
         // if we're attacking, we don't want to switch to other animations
         // if the animation is not done, return to prevent switching
         if (
-            this.image === this.sprites.attack1.image &&
-            this.curFrame < this.sprites.attack1.maxFrames - 1
+            (this.image === this.sprites.attack1Left.image || this.image === this.sprites.attack1Right.image) &&
+            this.curFrame < this.sprites.attack1Left.maxFrames - 1
         ) return;
 
         // same thing for taking a hit, needs to override all other animations
         if (
-            this.image === this.sprites.takeHit.image &&
-            this.curFrame < this.sprites.takeHit.maxFrames - 1
+            (this.image === this.sprites.takeHitLeft.image || this.image === this.sprites.takeHitRight.image) &&
+            this.curFrame < this.sprites.takeHitLeft.maxFrames - 1
         ) return;
 
         // each animation might has a different frame count,
         // need to update that in the player properties
-        switch (sprite) {
-            case 'idle':
-                if(this.image !== this.sprites.idle.image) {
-                    this.image = this.sprites.idle.image;
-                    this.maxFrames = this.sprites.idle.maxFrames;
+        switch (sprite + this.facing) {
+            case 'idleLeft':
+                if(this.image !== this.sprites.idleLeft.image) {
+                    this.image = this.sprites.idleLeft.image;
+                    this.maxFrames = this.sprites.idleLeft.maxFrames;
                     this.curFrame = 0;
                 }
                 break;
-            case 'run':
-                if(this.image !== this.sprites.run.image) {
-                    this.image = this.sprites.run.image;
-                    this.maxFrames = this.sprites.run.maxFrames;
+            case 'idleRight':
+                if(this.image !== this.sprites.idleRight.image) {
+                    this.image = this.sprites.idleRight.image;
+                    this.maxFrames = this.sprites.idleRight.maxFrames;
+                    this.curFrame = 0;
+                }
+                break;
+            case 'runRight':
+                if(this.image !== this.sprites.runRight.image) {
+                    this.image = this.sprites.runRight.image;
+                    this.maxFrames = this.sprites.runRight.maxFrames;
                     this.curFrame = 0;
                 }
                 break;
@@ -125,40 +135,75 @@ class Fighter extends Sprite {
                     this.curFrame = 0;
                 }
                 break;
-            case 'jump':
-                if(this.image !== this.sprites.jump.image) {
-                    this.image = this.sprites.jump.image;
-                    this.maxFrames = this.sprites.jump.maxFrames;
+            case 'jumpLeft':
+                if(this.image !== this.sprites.jumpLeft.image) {
+                    this.image = this.sprites.jumpLeft.image;
+                    this.maxFrames = this.sprites.jumpLeft.maxFrames;
+                    this.curFrame = 0;
+                }
+            case 'jumpRight':
+                if(this.image !== this.sprites.jumpRight.image) {
+                    this.image = this.sprites.jumpRight.image;
+                    this.maxFrames = this.sprites.jumpRight.maxFrames;
                     this.curFrame = 0;
                 }
                 break;
-            case 'fall':
-                if(this.image !== this.sprites.fall.image) {
-                    this.image = this.sprites.fall.image;
-                    this.maxFrames = this.sprites.fall.maxFrames;
+            case 'fallLeft':
+                if(this.image !== this.sprites.fallLeft.image) {
+                    this.image = this.sprites.fallLeft.image;
+                    this.maxFrames = this.sprites.fallLeft.maxFrames;
                     this.curFrame = 0;
                 }
                 break;
-            case 'attack1':
-                if(this.image !== this.sprites.attack1.image) {
-                    this.image = this.sprites.attack1.image;
-                    this.maxFrames = this.sprites.attack1.maxFrames;
+            case 'fallRight':
+                if(this.image !== this.sprites.fallRight.image) {
+                    this.image = this.sprites.fallRight.image;
+                    this.maxFrames = this.sprites.fallRight.maxFrames;
                     this.curFrame = 0;
                 }
                 break;
-            case 'takeHit':
-                if(this.image !== this.sprites.takeHit.image) {
-                    this.image = this.sprites.takeHit.image;
-                    this.maxFrames = this.sprites.takeHit.maxFrames;
+            case 'attack1Left':
+                if(this.image !== this.sprites.attack1Left.image) {
+                    this.image = this.sprites.attack1Left.image;
+                    this.maxFrames = this.sprites.attack1Left.maxFrames;
                     this.curFrame = 0;
                 }
                 break;
-            case 'death':
-                if(this.image !== this.sprites.death.image) {
-                    this.image = this.sprites.death.image;
-                    this.maxFrames = this.sprites.death.maxFrames;
+            case 'attack1Right':
+                if(this.image !== this.sprites.attack1Right.image) {
+                    this.image = this.sprites.attack1Right.image;
+                    this.maxFrames = this.sprites.attack1Right.maxFrames;
                     this.curFrame = 0;
                 }
+                break;
+            case 'takeHitRight':
+                if(this.image !== this.sprites.takeHitRight.image) {
+                    this.image = this.sprites.takeHitRight.image;
+                    this.maxFrames = this.sprites.takeHitRight.maxFrames;
+                    this.curFrame = 0;
+                }
+                break;
+            case 'takeHitLeft':
+                if(this.image !== this.sprites.takeHitLeft.image) {
+                    this.image = this.sprites.takeHitLeft.image;
+                    this.maxFrames = this.sprites.takeHitLeft.maxFrames;
+                    this.curFrame = 0;
+                }
+                break;
+            case 'deathLeft':
+                if(this.image !== this.sprites.deathLeft.image) {
+                    this.image = this.sprites.deathLeft.image;
+                    this.maxFrames = this.sprites.deathLeft.maxFrames;
+                    this.curFrame = 0;
+                }
+                break;
+            case 'deathRight':
+                if(this.image !== this.sprites.deathRight.image) {
+                    this.image = this.sprites.deathRight.image;
+                    this.maxFrames = this.sprites.deathRight.maxFrames;
+                    this.curFrame = 0;
+                }
+                break;
         }
     }
 

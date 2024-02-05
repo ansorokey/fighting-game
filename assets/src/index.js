@@ -31,6 +31,7 @@ const shop = new Sprite({
 
 // PLAYER CHARACTER
 const player = new Fighter({
+    facing: 'Right',
     position: {
         x: 0,
         y: 0
@@ -121,6 +122,7 @@ const player = new Fighter({
 
 // ENEMY CHARACTER
 const enemy = new Fighter({
+    facing: 'Left',
     position: {
         x: 400,
         y: 100
@@ -134,7 +136,7 @@ const enemy = new Fighter({
         x: -50,
         y: 0
     },
-    imgSrc: '../assets/images/player2/Idle.png',
+    imgSrc: '../assets/images/player2/Idle_left.png',
     maxFrames: 4,
     scale: 2.5,
     offset: {
@@ -245,7 +247,7 @@ function animate() {
     // playermovements
     if (GLOBAL.KEYS.a.pressed === true && player.lastKey === 'a') {
         player.velocity.x = -GLOBAL.WALK_SPEED;
-        player.switchSprite('runLeft');
+        player.switchSprite('run');
     } else if (GLOBAL.KEYS.d.pressed === true && player.lastKey === 'd') {
         player.velocity.x = GLOBAL.WALK_SPEED;
         player.switchSprite('run');
@@ -262,7 +264,7 @@ function animate() {
     // enemy movements
     if (GLOBAL.KEYS.ArrowLeft.pressed === true && enemy.lastKey === 'ArrowLeft') {
         enemy.velocity.x = -GLOBAL.WALK_SPEED;
-        enemy.switchSprite('runLeft');
+        enemy.switchSprite('run');
     } else if (GLOBAL.KEYS.ArrowRight.pressed === true && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = GLOBAL.WALK_SPEED;
         enemy.switchSprite('run');

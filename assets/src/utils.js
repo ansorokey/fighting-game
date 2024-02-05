@@ -15,7 +15,7 @@ export function determineWinner({player, enemy, timerId}) {
     document.querySelector('#results').innerHTML = winText;
 }
 
-let time = 6;
+let time = 99;
 export let timerId;
 export function decreaseTimer({player, enemy}) {
     timerId = setTimeout(() => decreaseTimer({player, enemy}), 1000);
