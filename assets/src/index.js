@@ -338,10 +338,12 @@ window.addEventListener('keydown', (e) => {
             case 'a':
                 GLOBAL.KEYS.a.pressed = true;
                 player.lastKey = 'a';
+                player.facing = 'Left';
                 break;
             case 'd':
                 GLOBAL.KEYS.d.pressed = true;
                 player.lastKey = 'd';
+                player.facing = 'Right';
                 break;
             case 'w':
                 player.velocity.y = GLOBAL.JUMP_HEIGHT;
@@ -360,10 +362,12 @@ window.addEventListener('keydown', (e) => {
             case 'ArrowLeft':
                 GLOBAL.KEYS.ArrowLeft.pressed = true;
                 enemy.lastKey = 'ArrowLeft';
+                enemy.facing = 'Left';
                 break;
             case 'ArrowRight':
                 GLOBAL.KEYS.ArrowRight.pressed = true;
                 enemy.lastKey = 'ArrowRight';
+                enemy.facing = 'Right';
                 break;
             case 'ArrowUp':
                 enemy.velocity.y = GLOBAL.JUMP_HEIGHT;
