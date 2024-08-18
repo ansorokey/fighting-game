@@ -64,6 +64,7 @@ class Fighter extends Sprite {
         }
     }
 
+    // Set attack state to true and move into attack animation
     attack() {
         this.isAttacking = true;
         this.switchSprite('attack1');
