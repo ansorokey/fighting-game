@@ -70,6 +70,7 @@ class Fighter extends Sprite {
         this.switchSprite('attack1');
     }
 
+    // Calculates damage or death
     takeHit() {
         this.health -= 20;
 
