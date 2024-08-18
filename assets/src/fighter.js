@@ -2,6 +2,7 @@ import {c, canvas} from './canvas.js'; // keep this in for dev stuff
 import Sprite from './sprite.js';
 import GLOBAL from './global.js';
 
+// Sprite class manages drawing
 class Fighter extends Sprite {
     // passing in an object and destructuring lets us
     // not worry about the parameter positions
